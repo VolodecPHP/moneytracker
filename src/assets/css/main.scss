@@ -1,0 +1,80 @@
+@import "normalize";
+
+$mainColor : #929292;
+$mainBackground : #f2f2f2;
+$mainBorderRadius: 4px;
+$mainShadow : 0px 0px 20px 2px rgb(112 112 112 / 25%);
+$focusColor : #222;
+
+#app {
+	min-height: 100vh;
+	background-color: $mainBackground;
+	display: flex;
+	align-items: center;
+}
+
+*:focus {
+	box-shadow: 0 0 50px $mainColor !important;
+	color: $focusColor !important;
+}
+
+.app-inner {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	color: $mainColor;
+}
+
+.app-main-title {
+	width: 100%;
+	text-align: center;
+	margin-bottom: 75px;
+	font-size: 32px;
+	text-transform: uppercase;
+	display: block;
+	margin-top: 0;
+}
+
+.card {
+	padding: 30px;
+	border-radius: $mainBorderRadius;
+	background-color: $mainBackground;
+	color: $mainColor;
+	box-shadow: $mainShadow;
+	border: none;
+	outline: none;
+	transition: .2s ease;
+
+	&-title {
+		font-size: 20px;
+		font-weight: 600;
+		margin-bottom: 70px;
+
+	}
+
+	&-icon svg {
+		width: 130px;
+		height: 100px;
+	}
+}
+
+.app-main-card {
+	width: 300px;
+	margin: 0 15px 25px;
+	min-height: 350px;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	flex-direction: column;
+	cursor: pointer;
+
+	&:hover {
+		transform: scale(1.05);
+		color: $focusColor;
+		box-shadow: 0 0 30px $mainColor !important;
+	}
+}
