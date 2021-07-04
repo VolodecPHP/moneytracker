@@ -405,3 +405,246 @@ template {
   color: #222;
   box-shadow: 0 0 30px #929292 !important;
 }
+
+.component-slider-wrapper {
+  position: fixed;
+  width: 100%;
+  padding: 15px 0;
+  background-color: #f2f2f2;
+  top: 0;
+  left: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.component-slider-wrapper--show {
+  left: 0;
+  transition: 0.3s;
+}
+.component-slider-wrapper--hide {
+  left: -100%;
+  transition: 0.3s;
+}
+.component-slider-wrapper-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  outline: none;
+  background: transparent;
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+  transition: 0.1s ease;
+}
+.component-slider-wrapper-close svg {
+  width: 100%;
+  height: 100%;
+}
+.component-slider-wrapper-close:hover {
+  transform: scale(1.1);
+}
+
+.component-slider-inner {
+  width: 80%;
+  padding: 50px;
+  border-radius: 16px;
+  height: calc(100vh - 130px);
+  overflow-y: auto;
+}
+
+.default-modal-caption {
+  margin-top: 0;
+  margin-bottom: 35px;
+  font-size: 26px;
+  color: #929292;
+  line-height: 1.5;
+}
+
+.label-default {
+  font-size: 18px;
+  display: inline-block;
+  color: #929292;
+  margin-bottom: 10px;
+}
+
+.input-default {
+  padding: 7px;
+  border: 1px solid #cfcfcf;
+  outline: none;
+  font-size: 17px;
+  color: #929292;
+  border-radius: 4px;
+  background-color: #f2f2f2;
+  line-height: 1.25;
+}
+
+.button-add {
+  margin-left: 15px;
+  border: none;
+  outline: none;
+  width: 37px;
+  height: 37px;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+}
+.button-add svg {
+  color: #929292;
+  width: 100%;
+  height: 100%;
+}
+
+.add-category-card {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 25px;
+}
+
+.category-card-row {
+  width: 33%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.category-card-row label {
+  width: 100%;
+}
+
+.category-card-row-single-item {
+  align-items: start;
+  padding-top: 30px;
+}
+.category-card-row-single-item .btn-primary {
+  width: 100%;
+  height: 37px;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.category-card-row-three-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+.category-card-row-three-buttons button {
+  margin-bottom: 15px;
+  width: 32%;
+  height: 37px;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-primary {
+  background-color: #484C93;
+  border-radius: 4px;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+  border: 1px solid #484C93;
+}
+.btn-primary:hover {
+  background-color: #353872;
+  border: 1px solid #353872;
+}
+.btn-primary:focus {
+  color: #fff !important;
+}
+
+.btn-warning {
+  background-color: #EA9200;
+  border-radius: 4px;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+  border: 1px solid #EA9200;
+}
+.btn-warning:hover {
+  background-color: #dd8a05;
+  border: 1px solid #dd8a05;
+}
+.btn-warning:focus {
+  color: #fff !important;
+}
+
+.btn-danger {
+  background-color: #a51818;
+  border-radius: 4px;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+  border: 1px solid #a51818;
+}
+.btn-danger:hover {
+  background-color: #8f1515;
+  border: 1px solid #8f1515;
+}
+.btn-danger:focus {
+  color: #fff !important;
+}
+
+.category-filters-wrapper {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.category-filters-wrapper .filter {
+  padding: 8px 16px;
+  font-size: 18px;
+  border-radius: 100px;
+  background-color: #929292;
+  color: #f2f2f2;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.category-filters-wrapper .filter:hover {
+  filter: brightness(1.2);
+}
+
+.single-category-card {
+  margin-bottom: 30px;
+  padding: 25px;
+  position: relative;
+}
+
+.disabled input,
+.disabled button {
+  padding: 0;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.edit-category-button {
+  width: 32%;
+  height: 37px;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #c4c4c4;
+  border-radius: 4px;
+}

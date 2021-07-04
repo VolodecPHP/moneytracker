@@ -5,6 +5,7 @@ $mainBackground : #f2f2f2;
 $mainBorderRadius: 4px;
 $mainShadow : 0px 0px 20px 2px rgb(112 112 112 / 25%);
 $focusColor : #222;
+$mainBorder : #cfcfcf;
 
 #app {
 	min-height: 100vh;
@@ -77,4 +78,267 @@ $focusColor : #222;
 		color: $focusColor;
 		box-shadow: 0 0 30px $mainColor !important;
 	}
+}
+
+.component-slider-wrapper {
+	position: fixed;
+	width: 100%;
+	padding: 15px 0;
+	background-color: $mainBackground;
+	top: 0;
+	left: 100vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&--show {
+		left: 0;
+		transition: .3s;
+	}
+
+	&--hide {
+		left: -100%;
+		transition: .3s;
+	}
+
+	&-close {
+		position: absolute;
+		top: 15px;
+		right: 15px;
+		width: 40px;
+		height: 40px;
+		border: none;
+		outline: none;
+		background: transparent;
+		border-radius: 50%;
+		padding: 0;
+		cursor: pointer;
+		transition: .1s ease;
+
+		svg {
+			width: 100%;
+			height: 100%;
+		}
+
+		&:hover {
+			transform: scale(1.1);
+		}
+	}
+}
+
+.component-slider-inner {
+	width: 80%;
+	padding: 50px;
+	border-radius: 16px;
+	height: calc(100vh - 130px);
+	overflow-y: auto;
+}
+
+.default-modal-caption {
+	margin-top: 0;
+	margin-bottom: 35px;
+	font-size: 26px;
+	color: $mainColor;
+	line-height: 1.5;
+}
+
+.label-default {
+	font-size: 18px;
+	display: inline-block;
+	color: $mainColor;
+	margin-bottom: 10px;
+}
+
+.input-default {
+	padding: 7px;
+	border: 1px solid $mainBorder;
+	outline: none;
+	font-size: 17px;
+	color: $mainColor;
+	border-radius: $mainBorderRadius;
+	background-color: $mainBackground;
+	line-height: 1.25;
+}
+
+.button-add {
+	margin-left: 15px;
+	border: none;
+	outline: none;
+	width: 37px;
+	height: 37px;
+	border-radius: 50%;
+	cursor: pointer;
+	padding: 0;
+
+	svg {
+		color: $mainColor;
+		width: 100%;
+		height: 100%;
+	}
+}
+
+.add-category-card {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 25px;
+}
+
+.category-card-row {
+	width: 33%;
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+	flex-wrap: wrap;
+
+	label {
+		width: 100%;
+	}
+}
+
+.category-card-row-single-item {
+	align-items: start;
+	padding-top: 30px;
+
+	.btn-primary {
+		width: 100%;
+		height: 37px;
+		cursor: pointer;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}
+
+.category-card-row-three-buttons {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	padding-top: 20px;
+
+	button {
+		margin-bottom: 15px;
+		width: 32%;
+		height: 37px;
+		cursor: pointer;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}
+
+.btn-primary {
+	background-color: #484C93;
+	border-radius: $mainBorderRadius;
+	color: #fff;
+	outline: none;
+	cursor: pointer;
+	border: 1px solid #484C93;
+
+	&:hover {
+		background-color: #353872;
+		border: 1px solid #353872;
+	}
+
+	&:focus {
+		color: #fff !important;
+	}
+}
+
+.btn-warning {
+	background-color: #EA9200;
+	border-radius: $mainBorderRadius;
+	color: #fff;
+	outline: none;
+	cursor: pointer;
+	border: 1px solid #EA9200;
+
+	&:hover {
+		background-color: #dd8a05;
+		border: 1px solid #dd8a05;
+	}
+
+	&:focus {
+		color: #fff !important;
+	}
+}
+
+.btn-danger {
+	background-color: #a51818;
+	border-radius: $mainBorderRadius;
+	color: #fff;
+	outline: none;
+	cursor: pointer;
+	border: 1px solid #a51818;
+
+	&:hover {
+		background-color: #8f1515;
+		border: 1px solid #8f1515;
+	}
+
+	&:focus {
+		color: #fff !important;
+	}
+}
+
+.category-filters-wrapper {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+
+	.filter {
+		padding: 8px 16px;
+		font-size: 18px;
+		border-radius: 100px;
+		background-color: $mainColor;
+		color: $mainBackground;
+		cursor: pointer;
+		margin-right: 10px;
+		margin-bottom: 10px;
+
+		&:hover {
+			filter: brightness(1.2);
+		}
+	}
+}
+
+.single-category-card {
+	margin-bottom: 30px;
+	padding: 25px;
+	position: relative;
+}
+
+.disabled {
+
+	input,
+	button {
+		padding: 0;
+		border: none !important;
+		outline: none !important;
+		box-shadow: none !important;
+	}
+}
+
+.edit-category-button {
+	width: 32%;
+	height: 37px;
+	cursor: pointer;
+	padding: 0;
+	margin: 0;
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+::-webkit-scrollbar {
+	width: 9px;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #c4c4c4;
+	border-radius: 4px;
 }
