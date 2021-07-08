@@ -81,6 +81,7 @@ export default {
 			if(result) {
 				this.$emit('handle-delete', this.$props.info)
 			}
+			this.isEditing = false
 		},
 		async saveChanges() {
 			let result = await confirmation('зберегти зміни, попередні дані буде втрачено')
