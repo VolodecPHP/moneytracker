@@ -8,7 +8,7 @@
 		</div>
 		<div class="category-card-row">
 			<label class="label-default">Фільтри:</label>
-			<input v-if="isEditing" type="text" class="input-default" v-model="currentFilter" :disabled="!isEditing">      
+			<input v-if="isEditing" type="text" class="input-default" v-model="currentFilter" :disabled="!isEditing" @keydown.enter="addFilter()">      
 			<button v-if="isEditing" class="button-add" @click="addFilter()">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
           <path
@@ -29,20 +29,26 @@
 		</div>
 		<div v-if="isEditing" class="category-card-row category-card-row-three-buttons">
     	<button class="btn-warning" @click="discardChanges()">Скасувати</button>
-    	<button class="btn-danger">Видалити</button>
-    	<button class="btn-primary">Зберегти</button>
+    	<button class="btn-danger" @click="deleteCategory()">Видалити</button>
+    	<button class="btn-primary" @click="saveChanges()">Зберегти</button>
 		</div>
     <button v-if="!isEditing" class="btn-primary edit-category-button" @click="isEditing = true">Редагувати</button>
 	</div>
 </template>
 
 <script>
+import { confirmation } from '../api/confirmationPopup'
+
 export default {
 	props: {
 		info : {
 			type : Object,
 			required : true
 		}
+	},
+	emits: {
+		'handle-delete': null,
+		'handle-edit': null
 	},
 	data() {
 		return {
@@ -59,15 +65,35 @@ export default {
 			}
 		},
 		addFilter() {
-			this.categoryFilters.add(this.currentFilter)
+			if(this.currentFilter.length) {
+				this.categoryFilters.add(this.currentFilter)
+			}
+			this.currentFilter = ''
 		},
 		discardChanges() {
 			this.categoryName = this.$props.info.categoryName
 			this.categoryFilters = new Set(this.$props.info.categoryFilters)
 			this.currentFilter = ''
 			this.isEditing = false
+		},
+		async deleteCategory() {
+			let result = await confirmation('назавжди видалити цю категорію і її фільтри')
+			if(result) {
+				this.$emit('handle-delete', this.$props.info)
+			}
+		},
+		async saveChanges() {
+			let result = await confirmation('зберегти зміни, попередні дані буде втрачено')
+			if(result) {
+				this.$emit('handle-edit', this.info.categoryName ,{
+					categoryName : this.categoryName,
+					categoryFilters : Array.from(this.categoryFilters)
+				})
+				this.isEditing = false
+			}
+			
 		}
-	}
+	} 
 }
 </script>
 

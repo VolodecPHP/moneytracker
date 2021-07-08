@@ -55,13 +55,15 @@ export default {
 			this.categoryFilters.delete(filter)
 		},
 		saveCategory() {
-			this.$emit('add-new-category', {
-				categoryName : this.categoryName,
-				categoryFilters : Array.from(this.categoryFilters)
-			})
-			this.categoryName = ''
-			this.currentFilter = ''
-			this.categoryFilters = new Set()
+			if(this.categoryName.length) {
+				this.$emit('add-new-category', {
+					categoryName : this.categoryName,
+					categoryFilters : Array.from(this.categoryFilters)
+				})
+				this.categoryName = ''
+				this.currentFilter = ''
+				this.categoryFilters = new Set()
+			}
 		}
 	}
 };
