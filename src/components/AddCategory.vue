@@ -17,6 +17,13 @@
         </svg>
       </button>
     </div>
+    <div class="category-card-row">
+      <label class="label-default">Тип категорії:</label>
+      <select class="input-default" v-model="categoryType" >
+				<option value="Boolean">Один з</option>
+				<option value="Number">Число</option>
+			</select>
+    </div>
 		<div class="category-card-row category-card-row-single-item">
     	<button class="btn-primary" @click="saveCategory()">Зберегти</button>
 		</div>
@@ -38,6 +45,7 @@ export default {
 			categoryName : '',
 			currentFilter : '',
 			categoryFilters : new Set(),
+			categoryType : 'Number'
 		}
 	},
 	emits : {
@@ -58,6 +66,7 @@ export default {
 			if(this.categoryName.length) {
 				this.$emit('add-new-category', {
 					categoryName : this.categoryName,
+					categoryType : this.categoryType,
 					categoryFilters : Array.from(this.categoryFilters)
 				})
 				this.categoryName = ''

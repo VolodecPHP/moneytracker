@@ -337,6 +337,152 @@ template {
   display: none;
 }
 
+.bouncer-loader {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  width: 100px;
+  height: 100px;
+}
+
+.bouncer-loader div {
+  width: 20px;
+  height: 20px;
+  background: #353872;
+  border-radius: 50%;
+  animation: bouncer 0.5s cubic-bezier(0.19, 0.57, 0.3, 0.98) infinite alternate;
+}
+
+.bouncer-loader div:nth-child(2) {
+  animation-delay: 1s;
+  opacity: 0.8;
+}
+
+.bouncer-loader div:nth-child(3) {
+  animation-delay: 2s;
+  opacity: 0.7;
+}
+
+.bouncer-loader div:nth-child(4) {
+  animation-delay: 3s;
+  opacity: 0.6;
+}
+
+@keyframes bouncer {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100px);
+  }
+}
+.loader-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader-wrapper.fixed {
+  position: fixed;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 100000;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.square-loader {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  perspective: 200px;
+}
+
+.square-loader div {
+  position: absolute;
+  top: 0;
+  width: 50px;
+  height: 50px;
+  background-color: #353872;
+  animation: flip 2s linear infinite;
+  transform-origin: right bottom;
+}
+
+.square-loader div:nth-child(2) {
+  animation-delay: 1s;
+  opacity: 0.5;
+}
+
+@keyframes flip {
+  0% {
+    transform: rotateX(0) rotateY(0);
+  }
+  25% {
+    transform: rotateX(0) rotateY(180deg);
+  }
+  50% {
+    transform: rotateX(180deg) rotateY(180deg);
+  }
+  75% {
+    transform: rotateX(180deg) rotateY(0);
+  }
+  100% {
+    transform: rotateX(0) rotateY(0);
+  }
+}
+.spinner-loader {
+  width: 100px;
+  height: 100px;
+  position: relative;
+}
+
+.spinner-loader div {
+  box-sizing: border-box;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 10px solid transparent;
+  border-top-color: #353872;
+  border-radius: 50%;
+  animation: spinnerOne 1.2s linear infinite;
+}
+
+.spinner-loader div:nth-child(2) {
+  border: 10px solid transparent;
+  border-bottom-color: #353872;
+  animation: spinnerTwo 1.2s linear infinite;
+}
+
+@keyframes spinnerOne {
+  0% {
+    transform: rotate(0deg);
+    border-width: 10px;
+  }
+  50% {
+    transform: rotate(180deg);
+    border-width: 1px;
+  }
+  100% {
+    transform: rotate(360deg);
+    border-width: 10px;
+  }
+}
+@keyframes spinnerTwo {
+  0% {
+    transform: rotate(0deg);
+    border-width: 1px;
+  }
+  50% {
+    transform: rotate(180deg);
+    border-width: 10px;
+  }
+  100% {
+    transform: rotate(360deg);
+    border-width: 1px;
+  }
+}
 #app {
   min-height: 100vh;
   background-color: #f2f2f2;
@@ -504,7 +650,7 @@ template {
 }
 
 .category-card-row {
-  width: 33%;
+  width: 25%;
   display: flex;
   align-items: center;
   margin-bottom: 20px;
@@ -621,11 +767,16 @@ template {
 }
 
 .disabled input,
-.disabled button {
+.disabled button,
+.disabled select {
   padding: 0;
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
+  opacity: 1;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .edit-category-button {
@@ -703,149 +854,24 @@ template {
   text-transform: uppercase;
 }
 
-.bouncer-loader {
+.filter-row {
+  width: 100%;
+  margin-bottom: 10px;
   display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
-  width: 100px;
-  height: 100px;
-}
-
-.bouncer-loader div {
-  width: 20px;
-  height: 20px;
-  background: #353872;
-  border-radius: 50%;
-  animation: bouncer 0.5s cubic-bezier(0.19, 0.57, 0.3, 0.98) infinite alternate;
-}
-
-.bouncer-loader div:nth-child(2) {
-  animation-delay: 1s;
-  opacity: 0.8;
-}
-
-.bouncer-loader div:nth-child(3) {
-  animation-delay: 2s;
-  opacity: 0.7;
-}
-
-.bouncer-loader div:nth-child(4) {
-  animation-delay: 3s;
-  opacity: 0.6;
-}
-
-@keyframes bouncer {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-100px);
-  }
-}
-.loader-wrapper {
-  display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
   align-items: center;
 }
-
-.loader-wrapper.fixed {
-  position: fixed;
-  width: 100vw !important;
-  height: 100vh !important;
-  z-index: 100000;
-  top: 0;
-  left: 0;
-  background-color: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(10px);
+.filter-row span {
+  font-weight: 700;
+  text-transform: uppercase;
 }
-
-.square-loader {
+.filter-row input:not([type=radio]) {
+  margin-right: 15px;
   width: 100px;
-  height: 100px;
-  position: relative;
-  perspective: 200px;
 }
-
-.square-loader div {
-  position: absolute;
-  top: 0;
-  width: 50px;
-  height: 50px;
-  background-color: #353872;
-  animation: flip 2s linear infinite;
-  transform-origin: right bottom;
+.filter-row input[type=radio] {
+  margin-right: 15px;
 }
-
-.square-loader div:nth-child(2) {
-  animation-delay: 1s;
-  opacity: 0.5;
-}
-
-@keyframes flip {
-  0% {
-    transform: rotateX(0) rotateY(0);
-  }
-  25% {
-    transform: rotateX(0) rotateY(180deg);
-  }
-  50% {
-    transform: rotateX(180deg) rotateY(180deg);
-  }
-  75% {
-    transform: rotateX(180deg) rotateY(0);
-  }
-  100% {
-    transform: rotateX(0) rotateY(0);
-  }
-}
-.spinner-loader {
-  width: 100px;
-  height: 100px;
-  position: relative;
-}
-
-.spinner-loader div {
-  box-sizing: border-box;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border: 10px solid transparent;
-  border-top-color: #353872;
-  border-radius: 50%;
-  animation: spinnerOne 1.2s linear infinite;
-}
-
-.spinner-loader div:nth-child(2) {
-  border: 10px solid transparent;
-  border-bottom-color: #353872;
-  animation: spinnerTwo 1.2s linear infinite;
-}
-
-@keyframes spinnerOne {
-  0% {
-    transform: rotate(0deg);
-    border-width: 10px;
-  }
-  50% {
-    transform: rotate(180deg);
-    border-width: 1px;
-  }
-  100% {
-    transform: rotate(360deg);
-    border-width: 10px;
-  }
-}
-@keyframes spinnerTwo {
-  0% {
-    transform: rotate(0deg);
-    border-width: 1px;
-  }
-  50% {
-    transform: rotate(180deg);
-    border-width: 10px;
-  }
-  100% {
-    transform: rotate(360deg);
-    border-width: 1px;
-  }
+.filter-row input[type=radio]:focus {
+  box-shadow: none !important;
 }
