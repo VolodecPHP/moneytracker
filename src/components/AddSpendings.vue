@@ -2,64 +2,87 @@
   <h2 class="default-modal-caption">
     Виберіть дату та заповніть поля, відповідно до ваших витрат
   </h2>
-  <loader v-if="!answerFromDB" type="SQUARE" />
-  <div class="card single-category-card" v-else>
+  <div class="card single-category-card">
     <div class="category-card-row">
       <label class="label-default">Виберіть дату витрат:</label>
-      <input
-        type="date"
-        class="input-default"
-      />
+      <input type="date" class="input-default" v-model="spendingsDate" />
     </div>
-    <div 
-		v-for="(category, i) in categories"
-		:key="i"
-		class="category-card-row">
-      <label class="label-default">{{ category.categoryName }}</label>
-			<template v-if="category.categoryType === 'Number'">
-				<div v-for="filter in category.categoryFilters" :key="filter" class="filter-row">
-					<input type="number" class="input-default" min="0" value="0">
-					<span>{{ filter }}</span>
-				</div>
-			</template>
-			<template v-else>
-				<div v-for="filter in category.categoryFilters" :key="filter" class="filter-row">
-					<input type="radio" name="filter">
-					<span>{{ filter }}</span>
-				</div>
-			</template>
-		</div>
   </div>
+  <spendings-filters @save-spend="addSpend" />
+  <loader v-if="fetchingSpendings" width="100%" height="300px" type="SPINNER" />
+  <template v-else>
+    <div
+      v-for="spending in allSpendings"
+      :key="spending"
+      class="card card--small"
+    >
+      <div class="title-wrapper">
+        <span class="title">{{ spending.description }}</span>
+      </div>
+      <span class="total">{{ spending.total }}</span>
+    </div>
+  </template>
+  <button class="btn-danger save-spendings" @click="saveSettings()">
+    Оновити витрати за цю дату
+  </button>
+  <loader v-if="savingSettings" size="100-100" type="SPINNER" />
 </template>
 
 <script>
 import { useCollection } from "../api/useCollection";
 import Loader from "./Loader.vue";
+import SpendingsFilters from "./SpendingsFilters.vue";
 
 export default {
-	components: {
-		Loader
-	},
+  components: {
+    Loader,
+    SpendingsFilters,
+  },
   data() {
     return {
-      categories: [],
-			answerFromDB : false
+      allSpendings: [],
+      spendingsDate: "",
+      savingSettings: false,
+      fetchingSpendings: false,
     };
   },
-  mounted() {
-		this.loadSettings()
-  },
-	methods: {
-		async loadSettings() {
-			this.answerFromDB = false;
-			const { getDoc } = useCollection("filtersConfig");
-			const loadedConfig = await getDoc("configFile");
-			this.answerFromDB = true;
-
-			if (loadedConfig) {
-				this.categories = loadedConfig.categories;
-				return;
+  methods: {
+    addSpend(obj) {
+      this.allSpendings.unshift(obj);
+    },
+    async saveSettings() {
+      if (!this.savingSettings) {
+        this.savingSettings = true;
+        const { addDoc } = useCollection("spendings");
+        await addDoc({ spendings: this.allSpendings }, this.spendingsDate);
+        this.savingSettings = false;
+      }
+    },
+    async loadSpendings() {
+			this.fetchingSpendings = true
+      const { getDoc } = useCollection("spendings");
+			const res = await getDoc(this.spendingsDate)
+			if(!res) {
+				this.allSpendings = []
+			} else {
+				this.allSpendings = res.spendings
 			}
+			this.fetchingSpendings = false
+    },
+  },
+  mounted() {
+    const current = new Date();
+    const year = current.getFullYear();
+    const month =
+      current.getMonth() >= 10 ? current.getMonth() : "0" + current.getMonth();
+    const day =
+      current.getDate() >= 10 ? current.getDate() : "0" + current.getDate();
+    this.spendingsDate = year + "-" + month + "-" + day;
+		this.loadSpendings()
+  },
+	watch: {
+		spendingsDate() {
+			this.loadSpendings()
 		}
 	}
 };

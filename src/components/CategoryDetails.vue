@@ -27,13 +27,6 @@
 				{{ filter }}
 			</div>
 		</div>
-    <div class="category-card-row">
-			<label class="label-default">Тип категорії:</label>
-      <select class="input-default" v-model="categoryType" :disabled="!isEditing">
-				<option value="Boolean">Boolean</option>
-				<option value="Number">Number</option>
-			</select>
-		</div>
 		<div v-if="isEditing" class="category-card-row category-card-row-three-buttons">
     	<button class="btn-warning" @click="discardChanges()">Скасувати</button>
     	<button class="btn-danger" @click="deleteCategory()">Видалити</button>
@@ -62,8 +55,7 @@ export default {
 			categoryName : this.info.categoryName,
 			categoryFilters : new Set(this.info.categoryFilters),
 			isEditing : false,
-			currentFilter : '',
-			categoryType : this.info.categoryType
+			currentFilter : ''
 		}
 	},
 	methods: {
@@ -80,7 +72,6 @@ export default {
 		},
 		discardChanges() {
 			this.categoryName = this.$props.info.categoryName
-			this.categoryType = this.$props.info.categoryType
 			this.categoryFilters = new Set(this.$props.info.categoryFilters)
 			this.currentFilter = ''
 			this.isEditing = false

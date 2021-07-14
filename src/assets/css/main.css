@@ -650,7 +650,7 @@ template {
 }
 
 .category-card-row {
-  width: 25%;
+  width: 33.3%;
   display: flex;
   align-items: center;
   margin-bottom: 20px;
@@ -658,6 +658,15 @@ template {
 }
 .category-card-row label {
   width: 100%;
+}
+.category-card-row .total {
+  text-transform: uppercase;
+  font-weight: 700;
+  padding-top: 5px;
+  color: #222;
+}
+.category-card-row .total .totalValue {
+  color: #353872;
 }
 
 .category-card-row-single-item {
@@ -845,7 +854,7 @@ template {
   top: 5%;
 }
 
-.update-filters {
+.update-filters, .save-spendings {
   width: 50%;
   min-width: 250px;
   margin-top: 30px;
@@ -861,9 +870,11 @@ template {
   flex-wrap: wrap;
   align-items: center;
 }
-.filter-row span {
+.filter-row label {
   font-weight: 700;
   text-transform: uppercase;
+  display: inline-block;
+  width: unset;
 }
 .filter-row input:not([type=radio]) {
   margin-right: 15px;
@@ -874,4 +885,31 @@ template {
 }
 .filter-row input[type=radio]:focus {
   box-shadow: none !important;
+}
+
+.card--small {
+  margin-bottom: 10px;
+  padding: 20px;
+  position: relative;
+}
+.card--small .title-wrapper {
+  width: 50%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.card--small .title {
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  word-wrap: none;
+}
+.card--small .total {
+  font-weight: 20px;
+  color: #222;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  font-weight: 700;
+  transform: translate(0, -50%);
 }

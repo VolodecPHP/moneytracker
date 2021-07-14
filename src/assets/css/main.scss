@@ -186,7 +186,7 @@ $mainBorder : #cfcfcf;
 }
 
 .category-card-row {
-	width: 25%;
+	width: 33.3%;
 	display: flex;
 	align-items: center;
 	margin-bottom: 20px;
@@ -194,6 +194,17 @@ $mainBorder : #cfcfcf;
 
 	label {
 		width: 100%;
+	}
+
+	.total {
+		text-transform: uppercase;
+		font-weight: 700;
+		padding-top: 5px;
+		color: $focusColor;
+
+		.totalValue {
+			color: #353872;
+		}
 	}
 }
 
@@ -403,7 +414,7 @@ $mainBorder : #cfcfcf;
 	}
 }
 
-.update-filters {
+.update-filters, .save-spendings{
 	width: 50%;
 	min-width: 250px;
 	margin-top: 30px;
@@ -419,9 +430,11 @@ $mainBorder : #cfcfcf;
 	flex-wrap: wrap;
 	align-items: center;
 
-	span {
+	label {
 		font-weight: 700;
 		text-transform: uppercase;
+		display: inline-block;
+		width: unset;
 	}
 
 	input:not([type="radio"]){
@@ -435,5 +448,35 @@ $mainBorder : #cfcfcf;
 		&:focus {
 			box-shadow: none !important;
 		}
+	}
+}
+
+.card--small {
+	margin-bottom: 10px;
+	padding: 20px;
+	position: relative;
+
+	.title-wrapper {
+		width: 50%;
+		overflow: hidden;
+		text-overflow: ellipsis;
+    white-space: nowrap;
+	}
+
+	.title{
+		font-size: 18px;
+		font-weight: 700;
+		text-transform: uppercase;
+		word-wrap: none;
+	}
+
+	.total {
+		font-weight: 20px;
+		color: $focusColor;
+		position: absolute;
+		top: 50%;
+		right: 20px;
+		font-weight: 700;
+		transform: translate(0,-50%);
 	}
 }
