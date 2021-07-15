@@ -17,6 +17,10 @@
 						</label>
 					</div>
 				</template>
+				<div class="total">
+          {{ key }} - total :
+          <span class="totalValue">{{ currentSpending[key].total }}</span>
+        </div>
 			</div>
     </template>		
 		<div class="category-card-row category-card-row-three-buttons">
@@ -28,6 +32,8 @@
 </template>
 
 <script>
+import { confirmation } from "../api/confirmationPopup";
+
 export default {
 	props: {
 		spending : {
@@ -43,13 +49,47 @@ export default {
 	invalidKeys : ["description", "total"],
 	watch: {
 		spending() {
-			this.currentSpending = Object.assign({}, this.spending );
+			this.currentSpending = JSON.parse(JSON.stringify(this.$props.spending));
 		}
 	},
 	methods: {
 		handleInputEdit(key,filter,event) {
 			this.currentSpending[key][filter] = event.target.value
+			this.calcTotal(key)
+		},
+		calcTotal(categoryName) {
+      this.currentSpending[categoryName].total = Object.values(this.currentSpending[categoryName]).reduce((a,b) => Number(a) + Number(b)) - this.currentSpending[categoryName].total
+			this.currentSpending.total = 0
+			Object.keys(this.currentSpending).filter(value => !this.$options.invalidKeys.includes(value)).forEach(obj => {
+				this.currentSpending.total += this.currentSpending[obj].total
+			})
+    },
+		async discardChanges() {
+			const answer = await confirmation('скасувати, всі внесені зміни буде втрачено')
+			if(answer) {
+				this.currentSpending = JSON.parse(JSON.stringify(this.$props.spending));
+				this.$emit('cancel')
+			}
+		},
+		async deleteCategory() {
+			const answer = await confirmation('видалити витрати, без можливості відновлення')
+
+			if(answer) {
+				this.$emit('delete')
+			}
+		},
+		async saveChanges() {
+			const answer = await confirmation('зберегти, попередні дані буде втрачено')
+
+			if(answer) {
+				this.$emit('save', this.currentSpending)
+			}
 		}
+	},
+	emits: {
+		'cancel' : null,
+		'save' : null,
+		'delete' : null
 	}
 }
 </script>

@@ -11,21 +11,28 @@
   <loader v-if="fetchingSpendings" width="100%" height="300px" type="SPINNER" />
 	<div class="card edit-cards-wrapper" v-else-if="allSpendings.length">
 		<template v-for="spending in allSpendings" :key="spending" >
-			<button @click="openEditingWindow(spending)" class="card edit-card">
-				{{ normalizeTitle(spending.description) }}
+			<button @click="openEditingWindow(spending)" 
+			class="card edit-card"
+			:class="{ 'edit-card--active' : spending === currentSpending}">
+				<div class="title">{{ spending.description }}</div>
 			</button>
 		</template>
   </div>
 	<div class="no-spendings-title" v-else>
 		В цей день у вас немає витрат
 	</div>
-	<edit-single-spending :spending="currentSpending"/>
+	<edit-single-spending :spending="currentSpending" @cancel="discaredChanges" @save="saveChanges" @delete="deleteSpending"/>
+  <button class="btn-danger update-filters" @click="updateData()">
+    Оновити дані за цю дату
+  </button>
+  <loader v-if="savingData" size="100-100" type="SPINNER" />
 </template>
 
 <script>
 import { useCollection } from "../api/useCollection";
 import Loader from "./Loader.vue";
 import EditSingleSpending from "./EditSingleSpending.vue";
+import { confirmation } from "../api/confirmationPopup";
 
 export default {
 	components : {
@@ -37,7 +44,8 @@ export default {
 			allSpendings : [],
 			spendingsDate : '',
 			fetchingSpendings : false,
-			currentSpending : {}
+			currentSpending : {},
+			savingData : false,
 		}
 	},
 	methods: {
@@ -52,9 +60,6 @@ export default {
 			}
 			this.fetchingSpendings = false
 		},
-		normalizeTitle(str) {
-			return str.length >= 20 ? str.slice(0,17) + '...' : str
-		},
 		openEditingWindow(spending) {
 			if(this.currentSpending !== spending) {
 				this.currentSpending = spending
@@ -62,6 +67,28 @@ export default {
 			}
 
 			this.currentSpending = {}
+		},
+		discaredChanges() {
+			this.currentSpending = {}
+		},
+		saveChanges(spending) {
+			let index = this.allSpendings.indexOf(this.currentSpending)
+			this.allSpendings[index] = spending
+		},
+		deleteSpending() {
+      this.allSpendings = this.allSpendings.filter((item) => item !== this.currentSpending);
+			this.currentSpending = {}
+		},
+		async updateData() {
+      let result = await confirmation(
+        "оновити ваші дані, ці зміни НЕМОЖЛИВО буде відмінити"
+      );
+      if (result) {
+        this.savingData = true;
+        const { addDoc } = useCollection("spendings");
+        await addDoc({ spendings : this.allSpendings }, this.spendingsDate);
+        this.savingData = false;
+      }
 		}
 	},
 	mounted() {

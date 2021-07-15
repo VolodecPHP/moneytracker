@@ -927,14 +927,27 @@ template {
   box-sizing: border-box;
   margin-right: 3.333%;
   margin-bottom: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: 18px;
   text-transform: uppercase;
   text-align: center;
   font-weight: 600;
   cursor: pointer;
+  transition: 0.25s ease;
+  border: 3px solid transparent;
+}
+.edit-cards-wrapper .edit-card .title {
+  text-overflow: ellipsis;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -ms-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-line-clamp: 2;
+  -moz-line-clamp: 2;
+  -ms-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
 }
 .edit-cards-wrapper .edit-card:hover {
   transform: scale(1.05);
@@ -943,6 +956,10 @@ template {
 }
 .edit-cards-wrapper .edit-card:nth-child(4n) {
   margin-right: 0;
+}
+.edit-cards-wrapper .edit-card--active {
+  border: 3px solid #222;
+  color: #222;
 }
 
 .no-spendings-title {
