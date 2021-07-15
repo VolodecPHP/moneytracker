@@ -913,3 +913,47 @@ template {
   font-weight: 700;
   transform: translate(0, -50%);
 }
+
+.edit-cards-wrapper {
+  padding: 25px;
+  padding-bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+.edit-cards-wrapper .edit-card {
+  width: 22.5%;
+  aspect-ratio: 2/1;
+  box-sizing: border-box;
+  margin-right: 3.333%;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 600;
+  cursor: pointer;
+}
+.edit-cards-wrapper .edit-card:hover {
+  transform: scale(1.05);
+  color: #222;
+  box-shadow: 0 0 10px #929292 !important;
+}
+.edit-cards-wrapper .edit-card:nth-child(4n) {
+  margin-right: 0;
+}
+
+.no-spendings-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #222;
+}
+
+.spending-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 15px;
+}
