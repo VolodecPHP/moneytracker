@@ -8,7 +8,7 @@
       <input type="date" class="input-default" v-model="spendingsDate" />
     </div>
   </div>
-  <spendings-filters @save-spend="addSpend" />
+  <spendings-filters @save-spend="addSpend" :date="spendingsDate"/>
   <loader v-if="fetchingSpendings" width="100%" height="300px" type="SPINNER" />
   <template v-else>
     <div
