@@ -12,7 +12,7 @@ export const useCollection = collection => {
     }
   };
 
-  const addDocWithRandomName = async (data) => {
+  const addDocWithRandomName = async data => {
     try {
       await projectFirestore.collection(collection).add(data);
     } catch (err) {
@@ -30,5 +30,18 @@ export const useCollection = collection => {
 
 		return false
 	}
-  return { addDoc, addDocWithRandomName, getDoc};
+
+	const getAllDocuments = async () => {
+		const collectionRef = projectFirestore.collection(collection)
+
+		const res = await collectionRef.get()
+
+		if(!res.empty) {
+			return res.docs
+		} 
+
+		return false
+	}
+
+  return { addDoc, addDocWithRandomName, getDoc, getAllDocuments};
 };

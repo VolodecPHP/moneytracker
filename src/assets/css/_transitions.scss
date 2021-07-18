@@ -1,0 +1,25 @@
+.list-complete-enter-from,
+.list-complete-leave-to {
+  opacity: 0;
+  transform: translateY(60px);
+}
+
+.list-complete-leave-active {
+  position: absolute;
+	width: 100%;
+	left: 0;
+}
+
+.component-fade-enter-active,
+.component-fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.component-fade-enter-from,
+.component-fade-leave-to {
+  opacity: 0;
+}
+
+.flip-list-move {
+  transition: transform 0.8s ease;
+}

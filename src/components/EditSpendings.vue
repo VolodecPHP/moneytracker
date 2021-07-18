@@ -94,7 +94,7 @@ export default {
 	mounted() {
     const current = new Date();
     const year = current.getFullYear();
-    const month = current.getMonth() >= 10 ? current.getMonth() : "0" + current.getMonth();
+    const month = current.getMonth() >= 10 ? (current.getMonth() + 1) : "0" + (current.getMonth() + 1);
     const day = current.getDate() >= 10 ? current.getDate() : "0" + current.getDate();
     this.spendingsDate = year + "-" + month + "-" + day;
 		this.loadSpendings()

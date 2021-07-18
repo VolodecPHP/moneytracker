@@ -91,10 +91,42 @@ var useCollection = function useCollection(collection) {
     });
   };
 
+  var getAllDocuments = function getAllDocuments() {
+    var collectionRef, res;
+    return regeneratorRuntime.async(function getAllDocuments$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            collectionRef = _firebaseconfig.projectFirestore.collection(collection);
+            _context4.next = 3;
+            return regeneratorRuntime.awrap(collectionRef.get());
+
+          case 3:
+            res = _context4.sent;
+
+            if (res.empty) {
+              _context4.next = 6;
+              break;
+            }
+
+            return _context4.abrupt("return", res.docs);
+
+          case 6:
+            return _context4.abrupt("return", false);
+
+          case 7:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    });
+  };
+
   return {
     addDoc: addDoc,
     addDocWithRandomName: addDocWithRandomName,
-    getDoc: getDoc
+    getDoc: getDoc,
+    getAllDocuments: getAllDocuments
   };
 };
 
