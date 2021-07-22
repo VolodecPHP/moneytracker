@@ -1,6 +1,7 @@
 @import "normalize";
 @import "loaders";
 @import "transitions";
+@import "chart";
 
 $mainColor : #929292;
 $mainBackground : #f2f2f2;
@@ -774,6 +775,7 @@ $mainBorder : #cfcfcf;
 	padding: 0;
 	margin-left: -20px;
 	cursor: pointer;
+	background-color: transparent;
 
 	&:focus {
 		box-shadow: none !important;
@@ -785,4 +787,31 @@ $mainBorder : #cfcfcf;
 		width: 30px;
 		height: 30px;
 	}
+}
+
+.chart-wrapper {
+	padding: 5px;
+	background-color: #fff;
+	margin-bottom: 25px;
+	width: 100%;
+}
+
+::-webkit-scrollbar:horizontal {
+	height: 8px;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+	background: linear-gradient(0.25turn, #353872, #484C93, #353872);
+	border-radius: 8px;
+}
+
+.show-spendings-diagrams-wrapper {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.chart-pie-wrapper {
+	width: 100%;
 }
