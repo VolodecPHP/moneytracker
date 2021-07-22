@@ -52,7 +52,7 @@ export default {
         },
         series: [
           {
-            name: "Spendings",
+            name: "Витрачено",
             colorByPoint: true,
             data: this.chartData,
           },

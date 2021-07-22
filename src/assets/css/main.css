@@ -1906,7 +1906,8 @@ text.highcharts-drilldown-data-label,
   top: 5%;
 }
 
-.update-filters, .save-spendings {
+.update-filters,
+.save-spendings {
   width: 50%;
   min-width: 250px;
   margin-top: 30px;
@@ -2265,4 +2266,51 @@ text.highcharts-drilldown-data-label,
 
 .chart-pie-wrapper {
   width: 100%;
+}
+
+.enabled-filters-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.enabled-filters-wrapper .category-row {
+  width: calc(50% - 10px);
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.enabled-filters-wrapper .category-row .category-name {
+  width: 100%;
+  font-weight: 600;
+  color: #222;
+  font-size: 18px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+.enabled-filters-wrapper .category-row .filters {
+  display: flex;
+  flex-wrap: wrap;
+}
+.enabled-filters-wrapper .category-row .filters .filter-row {
+  height: 38px;
+  width: auto;
+  margin-right: 15px;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #f2f2f2;
+  color: #929292;
+  cursor: pointer;
+}
+.enabled-filters-wrapper .category-row .filters .filter-row input {
+  border: none;
+  background-color: #fff;
+  outline: none;
+  border-radius: 0;
+}
+.enabled-filters-wrapper .category-row input {
+  width: 15px;
+  height: 15px;
+  margin-left: 15px;
+  background-color: red;
+  margin-right: 0;
 }
