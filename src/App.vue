@@ -75,6 +75,8 @@ export default {
     },
   ],
 
+	componentNames : new Set(['add-spendings', 'show-spendings', 'edit-spendings', 'add-filters']),
+
   methods: {
     triggerSLider(componentName) {
       this.activeComponent = componentName;
@@ -83,9 +85,41 @@ export default {
     closeSlider() {
       this.sliderOpened = false;
     },
+		watchLocationChange() {
+			console.log('change')
+		}
+  },
+
+  mounted() {
+		let path = window.location.pathname.split('/')[1]
+
+		if(path && this.$options.componentNames.has(path)) {
+			this.triggerSLider(path)
+			return
+		}
+		
+		window.addEventListener('popstate', this.watchLocationChange)
+  },
+
+	beforeUnmount() {
+		window.removeEventListener('popstate', this.watchLocationChange)
+	},
+
+  watch: {
+		
+    activeComponent() {
+			let stateObj = {
+    foo: "bar",
+}
+
+      history.pushState(
+        stateObj,
+        document.title,
+        `${this.activeComponent}`
+      );
+    },
   },
 };
 </script>
 
-<style src="./assets/css/main.css">
-</style>
+<style src="./assets/css/main.css"></style>
