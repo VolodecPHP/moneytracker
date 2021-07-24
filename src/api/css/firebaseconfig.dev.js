@@ -3,11 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.projectFirestore = void 0;
+exports.projectFirestore = exports.projectAuth = void 0;
 
 var _app = _interopRequireDefault(require("firebase/app"));
 
 require("firebase/firestore");
+
+require("firebase/auth");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -21,6 +23,10 @@ var firebaseConfig = {
 }; // init firebase
 
 _app["default"].initializeApp(firebaseConfig);
+
+var projectAuth = _app["default"].auth();
+
+exports.projectAuth = projectAuth;
 
 var projectFirestore = _app["default"].firestore();
 

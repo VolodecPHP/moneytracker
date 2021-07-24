@@ -34,6 +34,9 @@
 
 <script>
 import ComponentsSlider from "./components/ComponentsSlider.vue";
+import {useSignup} from "./api/signUp";
+import {useLogin} from "./api/login";
+import getUser from "./api/getUser";
 
 export default {
   name: "App",
@@ -75,7 +78,12 @@ export default {
     },
   ],
 
-	componentNames : new Set(['add-spendings', 'show-spendings', 'edit-spendings', 'add-filters']),
+  componentNames: new Set([
+    "add-spendings",
+    "show-spendings",
+    "edit-spendings",
+    "add-filters",
+  ]),
 
   methods: {
     triggerSLider(componentName) {
@@ -85,38 +93,48 @@ export default {
     closeSlider() {
       this.sliderOpened = false;
     },
-		watchLocationChange() {
-			console.log('change')
+    watchLocationChange() {
+      console.log("change");
+    },
+    async register(email, password) {
+      const { signup, getError} = useSignup();
+
+      await signup(email, password);
+    },
+    async login(email, password) {
+      const { login, getError} = useLogin();
+
+      await login(email, password);
+			console.log(getError())
+    },
+		getUser() {
+			const { user } = getUser()
+
+			return user._value
 		}
   },
 
-  mounted() {
-		let path = window.location.pathname.split('/')[1]
+  async mounted() {
+    // await this.login('volodec02@gmail.com', 'vova190802');
+		console.log(this.getUser())
 
-		if(path && this.$options.componentNames.has(path)) {
-			this.triggerSLider(path)
-			return
-		}
-		
-		window.addEventListener('popstate', this.watchLocationChange)
+    let path = window.location.pathname.split("/")[1];
+
+    if (path && this.$options.componentNames.has(path)) {
+      this.triggerSLider(path);
+      return;
+    }
+
+    window.addEventListener("popstate", this.watchLocationChange);
   },
 
-	beforeUnmount() {
-		window.removeEventListener('popstate', this.watchLocationChange)
-	},
+  beforeUnmount() {
+    window.removeEventListener("popstate", this.watchLocationChange);
+  },
 
   watch: {
-		
     activeComponent() {
-			let stateObj = {
-    foo: "bar",
-}
-
-      history.pushState(
-        stateObj,
-        document.title,
-        `${this.activeComponent}`
-      );
+      history.pushState(null, document.title, `${this.activeComponent}`);
     },
   },
 };
