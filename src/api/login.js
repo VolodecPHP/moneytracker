@@ -10,7 +10,7 @@ export const useLogin = () => {
 		try {
 			const res = await projectAuth.signInWithEmailAndPassword(email,password)
 			error = null
-	
+
 			return res
 	
 		} catch (err) {

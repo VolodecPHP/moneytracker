@@ -2314,3 +2314,87 @@ text.highcharts-drilldown-data-label,
   background-color: red;
   margin-right: 0;
 }
+
+.login-form-wrapper {
+  width: 100%;
+  max-width: 600px;
+  height: 100%;
+  max-height: 600px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.login-form-wrapper .login-form-title {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 48px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  margin-bottom: 50px;
+}
+.login-form-wrapper .input-wrapper {
+  display: block;
+  margin-bottom: 25px;
+  font-size: 18px;
+  color: #222;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.login-form-wrapper .input-wrapper input {
+  width: 100%;
+  margin-top: 10px;
+  height: 48px;
+  padding-left: 12px;
+}
+.login-form-wrapper .input-wrapper .show-password-button {
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.login-form-wrapper .input-wrapper .show-password-button svg {
+  width: 16px;
+  color: #222;
+}
+.login-form-wrapper .login-button {
+  width: 50%;
+  height: 48px;
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 25px;
+}
+.login-form-wrapper .change-method-button {
+  display: block;
+  color: #353872;
+  background: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: 700;
+}
+.login-form-wrapper .change-method-button:focus {
+  box-shadow: none !important;
+}
+.login-form-wrapper .change-method-button:focus, .login-form-wrapper .change-method-button:hover {
+  text-decoration: underline;
+}
+.login-form-wrapper .error {
+  color: #8f1515;
+  font-size: 16px;
+  margin-bottom: 25px;
+  display: block;
+  font-weight: 600;
+}

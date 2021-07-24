@@ -1,24 +1,27 @@
 <template>
   <div class="app-inner">
-    <h1 class="app-main-title">Привіт смішнявка!</h1>
-    <button
-      v-for="card in $options.sliderToggleButtons"
-      :key="card.buttonComponent"
-      @click="triggerSLider(card.buttonComponent)"
-      class="card app-main-card"
-    >
-      <div class="card-title">{{ card.title }}</div>
-      <div class="card-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-          <path fill="currentColor" :d="card.svgPathD" class=""></path>
-        </svg>
-      </div>
-    </button>
-    <components-slider
-      :currentComponent="activeComponent"
-      :opened="sliderOpened"
-      @close-slider="closeSlider"
-    ></components-slider>
+    <template v-if="logined">
+      <h1 class="app-main-title">Привіт смішнявка!</h1>
+      <button
+        v-for="card in $options.sliderToggleButtons"
+        :key="card.buttonComponent"
+        @click="triggerSLider(card.buttonComponent)"
+        class="card app-main-card"
+      >
+        <div class="card-title">{{ card.title }}</div>
+        <div class="card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path fill="currentColor" :d="card.svgPathD" class=""></path>
+          </svg>
+        </div>
+      </button>
+      <components-slider
+        :currentComponent="activeComponent"
+        :opened="sliderOpened"
+        @close-slider="closeSlider"
+      ></components-slider>
+    </template>
+		<login @login="successfullyLogined" v-else/>
     <div class="confirmation-popup-wrapper">
       <div class="card confirmation-popup">
         <div class="confirmation-popup-title">
@@ -34,20 +37,21 @@
 
 <script>
 import ComponentsSlider from "./components/ComponentsSlider.vue";
-import {useSignup} from "./api/signUp";
-import {useLogin} from "./api/login";
 import getUser from "./api/getUser";
+import Login from "./components/Login.vue";
 
 export default {
   name: "App",
   components: {
     ComponentsSlider,
+		Login
   },
 
   data() {
     return {
       activeComponent: "",
       sliderOpened: false,
+      logined: false,
     };
   },
 
@@ -96,27 +100,31 @@ export default {
     watchLocationChange() {
       console.log("change");
     },
-    async register(email, password) {
-      const { signup, getError} = useSignup();
+    getUser() {
+			let userFromLocalStorage = localStorage.getItem("logined-user");
 
-      await signup(email, password);
+			if(userFromLocalStorage) {
+				return JSON.parse(userFromLocalStorage)
+			}
+
+      const { user } = getUser();
+			
+      return user._value;
     },
-    async login(email, password) {
-      const { login, getError} = useLogin();
+		successfullyLogined(user) {
+			this.logined = true
 
-      await login(email, password);
-			console.log(getError())
-    },
-		getUser() {
-			const { user } = getUser()
-
-			return user._value
+      localStorage.setItem("logined-user", JSON.stringify(user));
 		}
   },
 
   async mounted() {
-    // await this.login('volodec02@gmail.com', 'vova190802');
-		console.log(this.getUser())
+		let user = this.getUser()
+		console.log(user)
+
+    if (user) {
+			this.logined = true
+    }
 
     let path = window.location.pathname.split("/")[1];
 
