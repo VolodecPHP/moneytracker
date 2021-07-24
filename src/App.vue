@@ -120,7 +120,6 @@ export default {
 
   async mounted() {
 		let user = this.getUser()
-		console.log(user)
 
     if (user) {
 			this.logined = true

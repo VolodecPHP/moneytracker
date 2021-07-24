@@ -69,6 +69,9 @@ export default {
 				this.hideSlider = false
 			}, 250);
 		}
+	},
+	mounted() {
+		this.showSlider = this.$props.opened
 	}
 }
 </script>
