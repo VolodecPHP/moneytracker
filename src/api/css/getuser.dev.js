@@ -16,9 +16,13 @@ _firebaseconfig.projectAuth.onAuthStateChanged(function (_user) {
 });
 
 var getUser = function getUser() {
-  return {
-    user: user
-  };
+  var userFromLocalStorage = localStorage.getItem("logined-user");
+
+  if (userFromLocalStorage) {
+    return JSON.parse(userFromLocalStorage);
+  }
+
+  return user.value;
 };
 
 var _default = getUser;

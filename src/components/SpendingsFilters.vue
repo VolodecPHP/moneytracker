@@ -49,6 +49,7 @@
 <script>
 import { useCollection } from "../api/useCollection";
 import Loader from "./Loader.vue";
+import getUser from "../api/getUser";
 
 export default {
   components: {
@@ -65,8 +66,9 @@ export default {
   },
   methods: {
     async loadSettings() {
+			let user = getUser()
       this.answerFromDB = false;
-      const { getDoc } = useCollection("filtersConfig");
+      const { getDoc } = useCollection(user.uid);
       const loadedConfig = await getDoc("configFile");
       this.answerFromDB = true;
 

@@ -33,6 +33,7 @@ import { useCollection } from "../api/useCollection";
 import Loader from "./Loader.vue";
 import EditSingleSpending from "./EditSingleSpending.vue";
 import { confirmation } from "../api/confirmationPopup";
+import getUser from "../api/getUser";
 
 export default {
 	components : {
@@ -46,12 +47,13 @@ export default {
 			fetchingSpendings : false,
 			currentSpending : {},
 			savingData : false,
+			uid : ''
 		}
 	},
 	methods: {
 		async loadSpendings() {
 			this.fetchingSpendings = true
-      const { getDoc } = useCollection("spendings");
+      const { getDoc } = useCollection(this.uid);
 			const res = await getDoc(this.spendingsDate)
 			if(!res) {
 				this.allSpendings = []
@@ -85,13 +87,15 @@ export default {
       );
       if (result) {
         this.savingData = true;
-        const { addDoc } = useCollection("spendings");
+        const { addDoc } = useCollection(this.uid);
         await addDoc({ spendings : this.allSpendings }, this.spendingsDate);
         this.savingData = false;
       }
 		}
 	},
 	mounted() {
+		let user = getUser()
+		this.uid = user.uid
     const current = new Date();
     const year = current.getFullYear();
     const month = current.getMonth() >= 10 ? (current.getMonth() + 1) : "0" + (current.getMonth() + 1);

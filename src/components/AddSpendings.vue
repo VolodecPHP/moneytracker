@@ -32,6 +32,7 @@
 import { useCollection } from "../api/useCollection";
 import Loader from "./Loader.vue";
 import SpendingsFilters from "./SpendingsFilters.vue";
+import getUser from "../api/getUser";
 
 export default {
   components: {
@@ -44,6 +45,7 @@ export default {
       spendingsDate: "",
       savingSettings: false,
       fetchingSpendings: false,
+			uid : ''
     };
   },
   methods: {
@@ -53,14 +55,14 @@ export default {
     async saveSettings() {
       if (!this.savingSettings) {
         this.savingSettings = true;
-        const { addDoc } = useCollection("spendings");
+        const { addDoc } = useCollection(this.uid);
         await addDoc({ spendings: this.allSpendings }, this.spendingsDate);
         this.savingSettings = false;
       }
     },
     async loadSpendings() {
 			this.fetchingSpendings = true
-      const { getDoc } = useCollection("spendings");
+      const { getDoc } = useCollection(this.uid);
 			const res = await getDoc(this.spendingsDate)
 			if(!res) {
 				this.allSpendings = []
@@ -71,6 +73,8 @@ export default {
     },
   },
   mounted() {
+		let user = getUser()
+		this.uid = user.uid
     const current = new Date();
     const year = current.getFullYear();
     const month =

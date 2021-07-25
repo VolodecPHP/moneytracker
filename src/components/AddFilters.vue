@@ -4,14 +4,16 @@
     раніше створені категорії
   </h2>
   <loader v-if="!answerFromDB" type="BOUNCER" />
-  <category-details
-    v-for="(category, i) in categories"
-    :key="i"
-    :info="category"
-    @handle-delete="deleteCategory"
-    @handle-edit="editCategory"
-    v-else
-  />
+	<template v-else>
+		<category-details
+			v-for="(category, i) in categories"
+			:key="i"
+			:info="category"
+			@handle-delete="deleteCategory"
+			@handle-edit="editCategory"
+			
+		/>
+	</template>
 
   <add-category @add-new-category="saveCategory" />
   <button class="btn-danger update-filters" @click="updateSettings()">
@@ -26,6 +28,7 @@ import AddCategory from "./AddCategory.vue";
 import CategoryDetails from "./CategoryDetails.vue";
 import Loader from "./Loader.vue";
 import { useCollection } from "../api/useCollection";
+import getUser from "../api/getUser";
 
 export default {
   components: {
@@ -38,6 +41,7 @@ export default {
       categories: [],
       answerFromDB: false,
       savingSettings: false,
+			user : null
     };
   },
   methods: {
@@ -61,14 +65,15 @@ export default {
       );
       if (result) {
         this.savingSettings = true;
-        const { addDoc } = useCollection("filtersConfig");
+        const { addDoc } = useCollection(this.user.uid);
         await addDoc({ categories: this.categories }, "configFile");
         this.savingSettings = false;
       }
     },
   },
   async mounted() {
-    const { getDoc } = useCollection("filtersConfig");
+		this.user = getUser()
+    const { getDoc } = useCollection(this.user.uid);
     const loadedConfig = await getDoc("configFile");
     this.answerFromDB = true;
 

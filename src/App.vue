@@ -100,30 +100,19 @@ export default {
     watchLocationChange() {
       console.log("change");
     },
-    getUser() {
-			let userFromLocalStorage = localStorage.getItem("logined-user");
-
-			if(userFromLocalStorage) {
-				return JSON.parse(userFromLocalStorage)
-			}
-
-      const { user } = getUser();
-			
-      return user._value;
-    },
 		successfullyLogined(user) {
 			this.logined = true
-
       localStorage.setItem("logined-user", JSON.stringify(user));
 		}
   },
 
   async mounted() {
-		let user = this.getUser()
+		let user = getUser()
 
     if (user) {
 			this.logined = true
     }
+
 
     let path = window.location.pathname.split("/")[1];
 

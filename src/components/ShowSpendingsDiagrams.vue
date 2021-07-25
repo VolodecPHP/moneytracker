@@ -49,6 +49,7 @@ import ChartLine from "./ChartLine.vue";
 import ChartPie from "./ChartPie.vue";
 import { useCollection } from "../api/useCollection";
 import Loader from "./Loader.vue";
+import getUser from "../api/getUser";
 
 export default {
   components: {
@@ -147,7 +148,8 @@ export default {
     },
   },
   async mounted() {
-    const { getDoc } = useCollection("filtersConfig");
+		let user = getUser()
+    const { getDoc } = useCollection(user.uid);
     const loadedConfig = await getDoc("configFile");
     this.answerFromDB = true;
 

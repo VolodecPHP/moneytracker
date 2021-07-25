@@ -52,8 +52,8 @@ export default {
 	},
 	data() {
 		return {
-			categoryName : this.info.categoryName,
-			categoryFilters : new Set(this.info.categoryFilters),
+			categoryName : this.$props.info.categoryName,
+			categoryFilters : new Set(this.$props.info.categoryFilters),
 			isEditing : false,
 			currentFilter : ''
 		}
@@ -88,14 +88,23 @@ export default {
 			if(result) {
 				this.$emit('handle-edit', this.info.categoryName ,{
 					categoryName : this.categoryName,
-					categoryType : this.categoryType,
 					categoryFilters : Array.from(this.categoryFilters)
 				})
 				this.isEditing = false
 			}
 			
 		}
-	} 
+	},
+	watch: {
+    $props: {
+      handler() {			
+				this.categoryName = this.$props.info.categoryName
+				this.categoryFilters = new Set(this.$props.info.categoryFilters)
+      },
+      deep: true,
+      immediate: true,
+    },
+	}
 }
 </script>
 

@@ -8,7 +8,13 @@ projectAuth.onAuthStateChanged(_user => {
 })
 
 const getUser = () => {
-  return { user }
+	let userFromLocalStorage = localStorage.getItem("logined-user");
+
+	if(userFromLocalStorage) { 
+		return JSON.parse(userFromLocalStorage)
+	}
+
+  return user.value
 }
 
 export default getUser
