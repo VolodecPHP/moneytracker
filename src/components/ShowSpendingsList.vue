@@ -1,19 +1,24 @@
 <template>
   <div class="show-spendings-list-wrapper">
 		<div class="card sorts-panel">
-			<label>
-				<span>Фільтр:</span>
-				<input type="text" class="input-default" v-model="searchFilter">
-			</label>
-			<label>
-				<span>Загальні витрати:</span>
-				<input type="number" class="input-default" min="0" max="99999" v-model="minTotal">
-				<span>-</span>
-				<input type="number" class="input-default" :min="minTotal" max="99999" v-model="maxTotal">
-			</label>
-			<button class="icon-reset-filters" @click="resetFilters()">
-				<svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M193.94 256L296.5 153.44l21.15-21.15c3.12-3.12 3.12-8.19 0-11.31l-22.63-22.63c-3.12-3.12-8.19-3.12-11.31 0L160 222.06 36.29 98.34c-3.12-3.12-8.19-3.12-11.31 0L2.34 120.97c-3.12 3.12-3.12 8.19 0 11.31L126.06 256 2.34 379.71c-3.12 3.12-3.12 8.19 0 11.31l22.63 22.63c3.12 3.12 8.19 3.12 11.31 0L160 289.94 262.56 392.5l21.15 21.15c3.12 3.12 8.19 3.12 11.31 0l22.63-22.63c3.12-3.12 3.12-8.19 0-11.31L193.94 256z" class=""></path></svg>
-			</button>
+			<div class="sorts-panel-column">
+				<label>
+					<span>Фільтр:</span>
+					<input type="text" class="input-default" v-model="searchFilter">
+				</label>
+			</div>
+			<div class="sorts-panel-column">
+				<label>
+					<span>Загальні витрати:</span>
+					<input type="number" class="input-default" min="0" max="99999" v-model="minTotal">
+					<span class="dash">-</span>
+					<input type="number" class="input-default" :min="minTotal" max="99999" v-model="maxTotal">
+					<button class="icon-reset-filters" @click="resetFilters()">
+						<svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M193.94 256L296.5 153.44l21.15-21.15c3.12-3.12 3.12-8.19 0-11.31l-22.63-22.63c-3.12-3.12-8.19-3.12-11.31 0L160 222.06 36.29 98.34c-3.12-3.12-8.19-3.12-11.31 0L2.34 120.97c-3.12 3.12-3.12 8.19 0 11.31L126.06 256 2.34 379.71c-3.12 3.12-3.12 8.19 0 11.31l22.63 22.63c3.12 3.12 8.19 3.12 11.31 0L160 289.94 262.56 392.5l21.15 21.15c3.12 3.12 8.19 3.12 11.31 0l22.63-22.63c3.12-3.12 3.12-8.19 0-11.31L193.94 256z" class=""></path></svg>
+					</button>
+				</label>
+			</div>
+			<div class="sorts-panel-column">
 			<label class="sort-label">
 				<span>Параметр сортування:</span>
 			</label>
@@ -25,6 +30,7 @@
 				<span>Дата</span>
 				<input type="radio" name="sortParam" value="date" v-model="sortParam">
 			</label>
+			</div>
 			<button class="sort-button" @click="sortDirection *= -1">
 				<svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
 				<path fill="currentColor" d="M304 416h-64a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM16 160h48v304a16 16 0 0 0 16 16h32a16 16 0 0 0 16-16V160h48c14.21 0 21.38-17.24 11.31-27.31l-80-96a16 16 0 0 0-22.62 0l-80 96C-5.35 142.74 1.77 160 16 160zm416 0H240a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h192a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm-64 128H240a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM496 32H240a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h256a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z" v-if="sortDirection === 1">

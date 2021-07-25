@@ -1,7 +1,7 @@
 <template>
   <div class="app-inner">
     <template v-if="logined">
-      <h1 class="app-main-title">Привіт смішнявка!</h1>
+      <h1 class="app-main-title">Привіт <span contenteditable class="animatedCaption">смішнявка</span>!</h1>
       <button
         v-for="card in $options.sliderToggleButtons"
         :key="card.buttonComponent"
@@ -103,6 +103,9 @@ export default {
 		successfullyLogined(user) {
 			this.logined = true
       localStorage.setItem("logined-user", JSON.stringify(user));
+		},
+		animateCaption() {
+
 		}
   },
 
@@ -113,6 +116,7 @@ export default {
 			this.logined = true
     }
 
+		this.animateCaption
 
     let path = window.location.pathname.split("/")[1];
 

@@ -121,50 +121,51 @@ export default {
   },
   mounted() {
     for (let i = 0; i <= 200; i++) {
-      this.categories.push(i);
+      this.categories.push(`17-${i}`);
+      this.seriesData.push(Math.random() * i * 1000);
     }
   },
   watch: {
-    $props: {
-      handler() {
-        this.categories = [];
-        this.seriesData = [];
-        this.$props.spendings.forEach((spending, index) => {
-          if (index < this.$props.spendings.length - 1) {
-            let date = new Date(spending.id);
-            let nextDate = new Date(this.$props.spendings[index + 1].id);
-            let diff = this.daysBetween(date,nextDate)
+    // $props: {
+    //   handler() {
+    //     this.categories = [];
+    //     this.seriesData = [];
+    //     this.$props.spendings.forEach((spending, index) => {
+    //       if (index < this.$props.spendings.length - 1) {
+    //         let date = new Date(spending.id);
+    //         let nextDate = new Date(this.$props.spendings[index + 1].id);
+    //         let diff = this.daysBetween(date,nextDate)
 
-            this.categories.push(
-              spending.id
-                .split("-")
-                .reverse()
-                .slice(0, 2)
-                .join("-")
-            );
-            this.seriesData.push(spending.spending);
+    //         this.categories.push(
+    //           spending.id
+    //             .split("-")
+    //             .reverse()
+    //             .slice(0, 2)
+    //             .join("-")
+    //         );
+    //         this.seriesData.push(spending.spending);
 
-            for (let i = 1; i < diff; i++) {
-              this.categories.push(this.getNextDate(date, i));
-              this.seriesData.push(0);
-            }
+    //         for (let i = 1; i < diff; i++) {
+    //           this.categories.push(this.getNextDate(date, i));
+    //           this.seriesData.push(0);
+    //         }
 
-            return;
-          }
+    //         return;
+    //       }
 
-          this.categories.push(
-            spending.id
-              .split("-")
-              .reverse()
-              .slice(0, 2)
-              .join("-")
-          );
-          this.seriesData.push(spending.spending);
-        });
-      },
-      deep: true,
-      immediate: true,
-    },
+    //       this.categories.push(
+    //         spending.id
+    //           .split("-")
+    //           .reverse()
+    //           .slice(0, 2)
+    //           .join("-")
+    //       );
+    //       this.seriesData.push(spending.spending);
+    //     });
+    //   },
+    //   deep: true,
+    //   immediate: true,
+    // },
   },
   methods: {
     daysBetween(startDate, endDate) {
