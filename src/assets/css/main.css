@@ -1559,7 +1559,7 @@ text.highcharts-drilldown-data-label,
 }
 @media (max-width: 1200px) {
   .app-inner {
-    padding-top: 75px;
+    padding-top: 125px;
   }
 }
 
@@ -2651,4 +2651,54 @@ text.highcharts-drilldown-data-label,
   100% {
     text-shadow: -10px -10px 0 rgba(0, 0, 255, 0.5), 10px 10px 0 rgba(255, 0, 0, 0.5);
   }
+}
+.page-header {
+  position: fixed;
+  height: 80px;
+  background-color: #f2f2f2;
+  box-shadow: 0px 0px 20px 2px rgba(112, 112, 112, 0.25);
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.page-header .header-logo {
+  width: 60px;
+  height: 60px;
+}
+.page-header .header-logo img {
+  width: 100%;
+  height: 100%;
+}
+.page-header .header-right {
+  display: flex;
+  align-items: center;
+}
+.page-header .header-right .user-email {
+  font-size: 18px;
+  margin-right: 15px;
+}
+.page-header .header-right .user-email .email {
+  font-weight: 600;
+}
+.page-header .header-right .logout {
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  outline: none;
+  border: none;
+  padding: 0;
+  color: #929292;
+  cursor: pointer;
+}
+.page-header .header-right .logout:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none;
+}
+.page-header .header-right .logout svg {
+  width: 100%;
 }

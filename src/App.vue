@@ -1,6 +1,7 @@
 <template>
   <div class="app-inner">
     <template v-if="logined">
+			<Header @logout="logout"/>
       <h1 class="app-main-title">Привіт <span contenteditable class="animatedCaption" @input="captionChange($event)">{{ editableCaptionText }}</span>!</h1>
       <button
         v-for="card in $options.sliderToggleButtons"
@@ -37,6 +38,7 @@
 
 <script>
 import ComponentsSlider from "./components/ComponentsSlider.vue";
+import Header from "./components/Header.vue";
 import getUser from "./api/getUser";
 import Login from "./components/Login.vue";
 
@@ -44,7 +46,8 @@ export default {
   name: "App",
   components: {
     ComponentsSlider,
-		Login
+		Login,
+		Header
   },
 
   data() {
@@ -107,6 +110,10 @@ export default {
 		},
 		captionChange(e) {
 		localStorage.setItem('captionMoneytracker', e.target.textContent)
+		},
+		logout() {
+      localStorage.removeItem('logined-user')
+			this.logined = false
 		}
   },
 

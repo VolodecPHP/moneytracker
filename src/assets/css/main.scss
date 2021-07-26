@@ -33,7 +33,7 @@ $mainBorder : #cfcfcf;
 	color: $mainColor;
 
 	@media(max-width: 1200px) {
-		padding-top: 75px;
+		padding-top: 125px;
 	}
 }
 
@@ -1209,5 +1209,64 @@ $mainBorder : #cfcfcf;
 
 	100% {
 		text-shadow: -10px -10px 0 rgba(0, 0, 255, .5), 10px 10px 0 rgba(255,0, 0, .5);
+	}
+}
+
+.page-header {
+	position: fixed;
+	height: 80px;
+	background-color: $mainBackground;
+	box-shadow: $mainShadow;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	.header-logo {
+		width: 60px;
+		height: 60px;
+
+		img {
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	.header-right {
+		display: flex;
+		align-items: center;
+
+		.user-email {
+			font-size: 18px;
+			margin-right: 15px;
+
+			.email {
+				font-weight: 600;
+			}
+		}
+
+		.logout {
+			width: 30px;
+			height: 30px;
+			background: transparent;
+			outline: none;
+			border: none;
+			padding: 0;
+			color: $mainColor;
+			cursor: pointer;
+
+			&:focus {
+				outline: none !important;
+				box-shadow: none !important;
+				border: none;
+			}
+
+			svg {
+				width: 100%;
+			}
+		}
 	}
 }
