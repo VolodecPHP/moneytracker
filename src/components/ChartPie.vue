@@ -57,6 +57,24 @@ export default {
             data: this.chartData,
           },
         ],
+        responsive: {
+          rules: [
+            {
+              condition: {
+                maxWidth: 767,
+              },
+              chartOptions: {
+                plotOptions: {
+                  pie: {
+                    dataLabels: {
+											distance : 0
+                    },
+                  },
+                },
+              },
+            },
+          ],
+        },
       };
     },
   },

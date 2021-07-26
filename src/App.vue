@@ -1,7 +1,7 @@
 <template>
   <div class="app-inner">
     <template v-if="logined">
-      <h1 class="app-main-title">Привіт <span contenteditable class="animatedCaption">смішнявка</span>!</h1>
+      <h1 class="app-main-title">Привіт <span contenteditable class="animatedCaption" @input="captionChange($event)">{{ editableCaptionText }}</span>!</h1>
       <button
         v-for="card in $options.sliderToggleButtons"
         :key="card.buttonComponent"
@@ -52,6 +52,7 @@ export default {
       activeComponent: "",
       sliderOpened: false,
       logined: false,
+			editableCaptionText : 'Смішнявка'
     };
   },
 
@@ -104,8 +105,8 @@ export default {
 			this.logined = true
       localStorage.setItem("logined-user", JSON.stringify(user));
 		},
-		animateCaption() {
-
+		captionChange(e) {
+		localStorage.setItem('captionMoneytracker', e.target.textContent)
 		}
   },
 
@@ -116,8 +117,12 @@ export default {
 			this.logined = true
     }
 
-		this.animateCaption
+		let captionFromLs = localStorage.getItem('captionMoneytracker')
 
+		if(captionFromLs) {
+			this.editableCaptionText = captionFromLs
+		}
+		
     let path = window.location.pathname.split("/")[1];
 
     if (path && this.$options.componentNames.has(path)) {
