@@ -239,6 +239,12 @@ $mainBorder : #cfcfcf;
 	display: flex;
 	flex-wrap: wrap;
 	padding: 25px;
+
+	.input-default {
+		@media(max-width: 768px) {
+			max-width: calc(100% - 40px);
+		}
+	}
 }
 
 .category-card-row {
