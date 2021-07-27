@@ -1749,7 +1749,7 @@ text.highcharts-drilldown-data-label,
   .button-add {
     width: 30px;
     height: 30px;
-    margin-left: 10px;
+    margin-left: 5px;
   }
 }
 .button-add svg {
@@ -1792,6 +1792,11 @@ text.highcharts-drilldown-data-label,
 .category-card-row-single-item {
   align-items: start;
   padding-top: 30px;
+}
+@media (max-width: 767px) {
+  .category-card-row-single-item {
+    order: 99;
+  }
 }
 .category-card-row-single-item .btn-primary {
   width: 100%;
@@ -2357,6 +2362,13 @@ text.highcharts-drilldown-data-label,
   .sorts-panel .sorts-panel-column .sort-label input {
     margin-right: 10px;
   }
+}
+@media (max-width: 767px) and (max-width: 767px) {
+  .sorts-panel .sorts-panel-column .sort-label:first-child {
+    width: 100%;
+  }
+}
+@media (max-width: 767px) {
   .sorts-panel .sorts-panel-column input {
     margin-right: 5px;
   }

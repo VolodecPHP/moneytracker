@@ -225,7 +225,7 @@ $mainBorder : #cfcfcf;
 	@media(max-width: 768px) {
 		width: 30px;
 		height: 30px;
-		margin-left: 10px;
+		margin-left: 5px;
 	}
 
 	svg {
@@ -271,6 +271,10 @@ $mainBorder : #cfcfcf;
 .category-card-row-single-item {
 	align-items: start;
 	padding-top: 30px;
+
+	@media(max-width: 767px) {
+    order: 99;
+	}
 
 	.btn-primary {
 		width: 100%;
@@ -875,6 +879,12 @@ $mainBorder : #cfcfcf;
 
 				input {
 					margin-right: 10px;
+				}
+
+				@media(max-width: 767px) {
+					&:first-child {
+						width: 100%;
+					}
 				}
 			}
 
