@@ -1,8 +1,16 @@
 <template>
   <div class="app-inner">
     <template v-if="logined">
-			<Header @logout="logout"/>
-      <h1 class="app-main-title">Привіт <span contenteditable class="animatedCaption" @input="captionChange($event)">{{ editableCaptionText }}</span>!</h1>
+      <Header @logout="logout" />
+      <h1 class="app-main-title">
+        Привіт
+        <span
+          contenteditable
+          class="animatedCaption"
+          @input="captionChange($event)"
+          >{{ editableCaptionText }}</span
+        >!
+      </h1>
       <button
         v-for="card in $options.sliderToggleButtons"
         :key="card.buttonComponent"
@@ -22,7 +30,7 @@
         @close-slider="closeSlider"
       ></components-slider>
     </template>
-		<login @login="successfullyLogined" v-else/>
+    <login @login="successfullyLogined" v-else />
     <div class="confirmation-popup-wrapper">
       <div class="card confirmation-popup">
         <div class="confirmation-popup-title">
@@ -46,8 +54,8 @@ export default {
   name: "App",
   components: {
     ComponentsSlider,
-		Login,
-		Header
+    Login,
+    Header,
   },
 
   data() {
@@ -55,7 +63,7 @@ export default {
       activeComponent: "",
       sliderOpened: false,
       logined: false,
-			editableCaptionText : 'Смішнявка'
+      editableCaptionText: "о_О",
     };
   },
 
@@ -101,53 +109,40 @@ export default {
     closeSlider() {
       this.sliderOpened = false;
     },
-    watchLocationChange() {
-      console.log("change");
-    },
-		successfullyLogined(user) {
-			this.logined = true
+    successfullyLogined(user) {
+      this.logined = true;
       localStorage.setItem("logined-user", JSON.stringify(user));
-		},
-		captionChange(e) {
-		localStorage.setItem('captionMoneytracker', e.target.textContent)
-		},
-		logout() {
-      localStorage.removeItem('logined-user')
-			this.logined = false
-		}
-  },
-
-  async mounted() {
-		let user = getUser()
-
-    if (user) {
-			this.logined = true
-    }
-
-		let captionFromLs = localStorage.getItem('captionMoneytracker')
-
-		if(captionFromLs) {
-			this.editableCaptionText = captionFromLs
-		}
-		
-    let path = window.location.pathname.split("/")[1];
-
-    if (path && this.$options.componentNames.has(path)) {
-      this.triggerSLider(path);
-      return;
-    }
-
-    window.addEventListener("popstate", this.watchLocationChange);
-  },
-
-  beforeUnmount() {
-    window.removeEventListener("popstate", this.watchLocationChange);
-  },
-
-  watch: {
-    activeComponent() {
-      history.pushState(null, document.title, `${this.activeComponent}`);
     },
+    captionChange(e) {
+      localStorage.setItem("captionMoneytracker", e.target.textContent);
+    },
+    logout() {
+      localStorage.removeItem("logined-user");
+      this.logined = false;
+    },
+		getCaptionFromLS() {
+			let captionFromLs = localStorage.getItem("captionMoneytracker");
+
+			if (captionFromLs) {
+				this.editableCaptionText = captionFromLs;
+			}
+		},
+		getComponentNameFromWindowLocation() {
+			let path = window.location.pathname.split("/")[1];
+
+			if (path && this.$options.componentNames.has(path)) {
+				this.triggerSLider(path);
+				return;
+			}
+		}
+  },
+
+  mounted() {
+		getUser() ? this.logined = true : this.logined = false
+
+		this.getCaptionFromLS()
+
+		this.getComponentNameFromWindowLocation()
   },
 };
 </script>

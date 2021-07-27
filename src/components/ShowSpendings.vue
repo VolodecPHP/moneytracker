@@ -83,7 +83,7 @@ export default {
     const { getAllDocuments } = useCollection(uid);
     const loadedSpendings = await getAllDocuments();
 
-    if (loadedSpendings.length !== 1) {
+    if (loadedSpendings.length > 1) {
 
       loadedSpendings.map(doc => {
 				if(doc.id !== 'configFile') {

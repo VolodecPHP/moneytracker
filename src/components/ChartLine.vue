@@ -124,39 +124,10 @@ export default {
       handler() {
         this.categories = [];
         this.seriesData = [];
-        this.$props.spendings.forEach((spending, index) => {
-          if (index < this.$props.spendings.length - 1) {
-            let date = new Date(spending.id);
-            let nextDate = new Date(this.$props.spendings[index + 1].id);
-            let diff = this.daysBetween(date,nextDate)
 
-            this.categories.push(
-              spending.id
-                .split("-")
-                .reverse()
-                .slice(0, 2)
-                .join("-")
-            );
-            this.seriesData.push(spending.spending);
-
-            for (let i = 1; i < diff; i++) {
-              this.categories.push(this.getNextDate(date, i));
-              this.seriesData.push(0);
-            }
-
-            return;
-          }
-
-          this.categories.push(
-            spending.id
-              .split("-")
-              .reverse()
-              .slice(0, 2)
-              .join("-")
-          );
-          this.seriesData.push(spending.spending);
-        });
+        this.fillEmptyDates();
       },
+
       deep: true,
       immediate: true,
     },
@@ -165,14 +136,53 @@ export default {
     daysBetween(startDate, endDate) {
       return (endDate - startDate) / (24 * 60 * 60 * 1000);
     },
-		getNextDate(d, n) {
-			let date = new Date(d.getTime() + (n * 24 * 60 * 60 * 1000))
-			let day = date.getDate() >= 10 ? date.getDate() : '0' + date.getDate()
-			let month = date.getMonth() >= 10 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1)
-			return day + '-' + month
-		}
+    getNextDate(d, n) {
+      let date = new Date(d.getTime() + n * 24 * 60 * 60 * 1000);
+      let day = date.getDate() >= 10 ? date.getDate() : "0" + date.getDate();
+      let month =
+        date.getMonth() >= 10
+          ? date.getMonth() + 1
+          : "0" + (date.getMonth() + 1);
+      return day + "-" + month;
+    },
+    categoriesPushNormalizedDate(date) {
+      this.categories.push(
+        date
+          .split("-")
+          .reverse()
+          .slice(0, 2)
+          .join("-")
+      );
+    },
+    fillEmptyDates() {
+      this.$props.spendings.forEach((spending, index) => {
+        if (index >= this.$props.spendings.length - 1) {
+          this.categoriesPushNormalizedDate(spending.id);
+          this.seriesData.push(spending.spending);
+
+          return;
+        }
+
+        let date = new Date(spending.id);
+        let nextDate = new Date(this.$props.spendings[index + 1].id);
+        let diff = this.daysBetween(date, nextDate);
+
+        this.categoriesPushNormalizedDate(spending.id);
+
+        this.seriesData.push(spending.spending);
+
+        for (let i = 1; i < diff; i++) {
+          this.categories.push(this.getNextDate(date, i));
+          this.seriesData.push(0);
+        }
+
+        return;
+      });
+    },
   },
 };
+
+// REFACTORED
 </script>
 
 <style scoped></style>

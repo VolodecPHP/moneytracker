@@ -4,9 +4,9 @@
     <div class="login-form-title">
       {{ method.type }}
     </div>
-		<label class="error" v-if="error">
-			{{ error }}
-		</label>
+    <label class="error" v-if="error">
+      {{ error }}
+    </label>
     <label class="input-wrapper">
       Email
       <input type="email" class="input-default" v-model="email" />
@@ -42,17 +42,17 @@ import { useLogin } from "../api/login";
 import Loader from "./Loader.vue";
 
 export default {
-	components: {
-		Loader,
-	},
+  components: {
+    Loader,
+  },
   data() {
     return {
       inputPasswordType: "password",
       method: this.$options.formMethods[0],
       password: "",
       email: "",
-			error : null,
-			fetching : false
+      error: null,
+      fetching: false,
     };
   },
 
@@ -81,43 +81,45 @@ export default {
         : (this.method = this.$options.formMethods[0]);
     },
     formSubmit() {
-			this.error = null
+      this.error = null;
 
       if (this.method.emitName === "login") {
-				this.login()
-				return
+        this.login();
+        return;
       }
 
-			this.signUp()
+      this.signUp();
     },
-		async login() {
-			this.fetching = true
-			const { login, getError } = useLogin();
+    async login() {
+      this.fetching = true;
+      const { login, getError } = useLogin();
       let res = await login(this.email, this.password);
-			this.error = getError()
-			this.fetching = false
+      this.error = getError();
+      this.fetching = false;
 
-			if(!this.error) {
-				this.$emit('login', res.user)
-			}
-		},
-		async signUp() {
-			this.fetching = true
+      if (!this.error) {
+        this.$emit("login", res.user);
+      }
+    },
+    async signUp() {
+      this.fetching = true;
       const { signup, getError } = useSignup();
 
       await signup(this.email, this.password);
-			this.error = getError()
-			this.fetching = false
+      this.error = getError();
+      this.fetching = false;
 
-			if(!this.error) {
-				this.login()
-			}
-		}
+      if (!this.error) {
+        this.login();
+      }
+    },
   },
-	emits: {
-		login : null
-	}
+  emits: {
+    login: null,
+  },
 };
+
+// REFACTORED
 </script>
 
 <style></style>

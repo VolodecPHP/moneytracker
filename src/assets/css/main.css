@@ -2538,6 +2538,7 @@ text.highcharts-drilldown-data-label,
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  overflow-y: auto;
 }
 .login-form-wrapper .login-form-title {
   text-align: center;

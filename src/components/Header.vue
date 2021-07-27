@@ -30,6 +30,8 @@ export default {
 		logout : null
 	}
 }
+
+// REFACTORED
 </script>
 
 <style>

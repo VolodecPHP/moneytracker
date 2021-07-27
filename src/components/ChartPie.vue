@@ -67,7 +67,7 @@ export default {
                 plotOptions: {
                   pie: {
                     dataLabels: {
-											distance : 0
+                      distance: 0,
                     },
                   },
                 },
@@ -97,6 +97,8 @@ export default {
     },
   },
 };
+
+// REFACTORED
 </script>
 
 <style></style>

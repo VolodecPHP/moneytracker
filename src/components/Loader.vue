@@ -49,4 +49,6 @@ export default {
     },
   },
 };
+
+// REFACTORED
 </script>
