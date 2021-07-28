@@ -110,20 +110,10 @@ $mainBorder : #cfcfcf;
 	padding: 15px 0;
 	background-color: $mainBackground;
 	top: 0;
-	left: 100vw;
+	left: 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
-	&--show {
-		left: 0;
-		transition: .3s;
-	}
-
-	&--hide {
-		left: -100%;
-		transition: .3s;
-	}
 
 	&-close {
 		position: absolute;
@@ -1270,4 +1260,43 @@ $mainBorder : #cfcfcf;
 			}
 		}
 	}
+}
+
+.components-slider-enter-from {
+	left: 100vw;
+}
+
+.components-slider-enter-to,
+.components-slider-leave-from {
+	left: 0;
+}
+
+.components-slider-enter-active,
+.components-slider-leave-active {
+	transition: all .5s ease;
+}
+
+.components-slider-leave-to {
+	left: -100vw;
+}
+
+.login-form-enter-from {
+	left: 100%;
+	transform: translate(0,-50%);
+}
+
+.login-form-enter-to,
+.login-form-leave-from {
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+
+.login-form-enter-active,
+.login-form-leave-active {
+	transition: all .5s ease;
+}
+
+.login-form-leave-to {
+	left: -100%;
+	transform: translate(-100%,-50%);
 }
