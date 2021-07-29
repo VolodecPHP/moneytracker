@@ -1,8 +1,8 @@
 <template>
-  <transition name="components-slider">
-    <div class="component-slider-wrapper" v-if="$props.opened">
+  <transition name="components-slider" appear="">
+    <div class="component-slider-wrapper" v-show="$props.opened">
       <div class="card component-slider-inner">
-        <component v-if="currentComponent" :is="currentComponent"></component>
+      	<component v-if="currentComponent" :is="currentComponent"></component>
       </div>
       <button class="component-slider-wrapper-close" @click="handleClose">
         <svg

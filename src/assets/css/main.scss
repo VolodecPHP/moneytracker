@@ -1278,4 +1278,16 @@ $mainBorder : #cfcfcf;
 	}
 }
 
+.components-slider-enter-from {
+	left: 100vw;
+}
 
+.components-slider-enter-to {
+	left: 0;
+}
+
+.components-slider-enter-active {
+	transition: all 5s ease;
+}
+
+@import "transitions";

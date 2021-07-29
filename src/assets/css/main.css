@@ -2780,3 +2780,109 @@ text.highcharts-drilldown-data-label,
 .page-header .header-right .logout svg {
   width: 100%;
 }
+
+.components-slider-enter-from {
+  left: 100vw;
+}
+
+.components-slider-enter-to {
+  left: 0;
+}
+
+.components-slider-enter-active {
+  transition: all 5s ease;
+}
+
+.list-complete-enter-from,
+.list-complete-leave-to {
+  opacity: 0;
+  transform: translateY(60px);
+}
+
+.list-complete-leave-active {
+  position: absolute;
+  width: 100%;
+  left: 0;
+}
+
+.component-fade-enter-active,
+.component-fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.component-fade-enter-from,
+.component-fade-leave-to {
+  opacity: 0;
+}
+
+.flip-list-move {
+  transition: transform 0.8s ease;
+}
+
+.components-slider-enter-from {
+  left: 100vw;
+}
+
+.components-slider-enter-to,
+.components-slider-leave-from {
+  left: 0;
+}
+
+.components-slider-enter-active,
+.components-slider-leave-active {
+  transition: all 0.5s ease;
+}
+
+.components-slider-leave-to {
+  left: -100vw;
+}
+
+.login-form-enter-from {
+  left: 100%;
+  transform: translate(0, -50%);
+}
+
+.login-form-enter-to,
+.login-form-leave-from {
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login-form-enter-active,
+.login-form-leave-active {
+  transition: all 0.5s ease;
+}
+
+.login-form-leave-to {
+  left: -100%;
+  transform: translate(-100%, -50%);
+}
+
+.add-filters-enter-from {
+  transform: translate(-100vw);
+}
+
+.add-filters-enter-to {
+  transform: translate(0vw);
+}
+
+.add-filters-enter-active {
+  transition: 0.4s ease;
+}
+
+.add-filters-leave-from {
+  transform: translate(0vw);
+}
+
+.add-filters-leave-to {
+  transform: translate(-100vw);
+}
+
+.add-filters-leave-active {
+  transition: 0.5s ease;
+  position: absolute;
+}
+
+.add-filters-move {
+  transition: 0.5s ease;
+}
