@@ -20,14 +20,14 @@
 		<div class="category-card-row category-card-row-single-item">
     	<button class="btn-primary" @click="saveCategory()">Зберегти</button>
 		</div>
-		<div class="category-filters-wrapper">
+		<transition-group tag="div" class="category-filters-wrapper" name="add-filters" appear>
 			<div 
 			v-for="filter in categoryFilters" :key="filter"
 			class="filter"
 			@click="handleRemove(filter)">
 				{{ filter }}
 			</div>
-		</div>
+		</transition-group>
   </div>
 </template>
 
