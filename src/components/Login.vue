@@ -1,5 +1,5 @@
 <template>
-  <transition name="login-form">
+  <transition name="login-form" appear>
     <div class="card login-form-wrapper" v-if="!fetching">
       <div class="login-form-title">
         {{ method.type }}
