@@ -581,20 +581,6 @@ template {
   transition: 0.5s ease;
 }
 
-.category-details-enter-from, .category-details-leave-to {
-  opacity: 0;
-  transform: translateY(100px);
-}
-
-.category-details-enter-to, .category-details-leave-from {
-  opacity: 1;
-  transform: translateY(0px);
-}
-
-.category-details-enter-active, .category-details-leave-active {
-  transition: 1s ease;
-}
-
 /* DASHBOARD CHARTS */
 /**
  * @license Highcharts
@@ -1615,6 +1601,15 @@ text.highcharts-drilldown-data-label,
 
 .chart-line-wrapper .highcharts-graph {
   stroke-width: 1px;
+}
+
+:root {
+  --mainColor: #929292;
+  --mainBackground: #f2f2f2;
+  --mainBorderRadius: 4px;
+  --mainShadow: 0px 0px 20px 2px rgb(112 112 112 / 25%);
+  --focusColor: #222;
+  --mainBorder: #cfcfcf;
 }
 
 #app {
@@ -2859,18 +2854,4 @@ body {
 
 .add-filters-move {
   transition: 0.5s ease;
-}
-
-.category-details-enter-from, .category-details-leave-to {
-  opacity: 0;
-  transform: translateY(100px);
-}
-
-.category-details-enter-to, .category-details-leave-from {
-  opacity: 1;
-  transform: translateY(0px);
-}
-
-.category-details-enter-active, .category-details-leave-active {
-  transition: 1s ease;
 }
