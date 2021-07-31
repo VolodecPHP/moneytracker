@@ -112,6 +112,7 @@ $mainBorder : #cfcfcf;
 	top: 0;
 	left: 0;
 	display: flex;
+	z-index: 1000;
 	justify-content: center;
 	align-items: center;
 
@@ -1176,49 +1177,6 @@ $mainBorder : #cfcfcf;
 	}
 }
 
-.animatedCaption {
-	color: $focusColor;
-	animation: 2s linear 0s infinite normal animateCaption;
-}
-
-@keyframes animateCaption {
-	0% {
-		text-shadow: -10px -10px 0 rgba(0, 0, 255, .5), 10px 10px 0 rgba(255,0, 0, .5);
-	}
-
-	12% {
-		text-shadow: 0px -15px 0 rgba(0, 0, 255, .5), 0px 15px 0 rgba(255,0, 0, .5);
-	}
-
-	24% {
-		text-shadow: 10px -10px 0 rgba(0, 0, 255, .5), -10px 10px 0 rgba(255,0, 0, .5);
-	}
-
-	36% {
-		text-shadow: 15px 0px rgba(0, 0, 255, .5), -15px 0px 0 rgba(255,0, 0, .5);
-	}
-
-	48% {
-		text-shadow: 10px 10px rgba(0, 0, 255, .5), -10px -10px 0 rgba(255,0, 0, .5);
-	}
-
-	60% {
-		text-shadow: 0px 15px 0 rgba(0, 0, 255, .5), 0px -15px 0 rgba(255,0, 0, .5);
-	}
-
-	72% {
-		text-shadow: -10px 10px 0 rgba(0, 0, 255, .5), 10px -10px 0 rgba(255,0, 0, .5);
-	}
-
-	84% {
-		text-shadow: -15px 0px 0 rgba(0, 0, 255, .5), 15px 0px 0 rgba(255,0, 0, .5);
-	}
-
-	100% {
-		text-shadow: -10px -10px 0 rgba(0, 0, 255, .5), 10px 10px 0 rgba(255,0, 0, .5);
-	}
-}
-
 .page-header {
 	position: fixed;
 	height: 80px;
@@ -1230,6 +1188,7 @@ $mainBorder : #cfcfcf;
 	padding: 15px;
 	display: flex;
 	align-items: center;
+	z-index: 999;
 	justify-content: space-between;
 
 	.header-logo {
@@ -1288,6 +1247,10 @@ $mainBorder : #cfcfcf;
 
 .components-slider-enter-active {
 	transition: all 5s ease;
+}
+
+body {
+	overflow-x: hidden
 }
 
 @import "transitions";

@@ -2,28 +2,37 @@
   <div class="app-inner">
     <template v-if="logined">
       <Header @logout="logout" />
-      <h1 class="app-main-title">
-        Привіт
-        <span
-          contenteditable
-          class="animatedCaption"
-          @input="captionChange($event)"
-          >{{ editableCaptionText }}</span
-        >!
-      </h1>
-      <button
-        v-for="card in $options.sliderToggleButtons"
-        :key="card.buttonComponent"
-        @click="triggerSLider(card.buttonComponent)"
-        class="card app-main-card"
+      <transition
+        appear
+        @before-enter="beforeEnterCaption"
+        @enter="enterCaption"
       >
-        <div class="card-title">{{ card.title }}</div>
-        <div class="card-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-            <path fill="currentColor" :d="card.svgPathD" class=""></path>
-          </svg>
-        </div>
-      </button>
+        <h1 class="app-main-title">
+          Привіт
+          <span contenteditable @input="captionChange($event)">{{
+            editableCaptionText
+          }}</span
+          >!
+        </h1>
+      </transition>
+      <transition-group appear
+        @before-enter="beforeEnterButton"
+        @enter="enterButton">
+        <button
+          v-for="(card, index) in $options.sliderToggleButtons"
+          :key="card.buttonComponent"
+          @click="triggerSLider(card.buttonComponent)"
+          class="card app-main-card"
+					:data-index="index"
+        >
+          <div class="card-title">{{ card.title }}</div>
+          <div class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="currentColor" :d="card.svgPathD" class=""></path>
+            </svg>
+          </div>
+        </button>
+      </transition-group>
       <components-slider
         :currentComponent="activeComponent"
         :opened="sliderOpened"
@@ -45,6 +54,7 @@
 </template>
 
 <script>
+import gsap from "gsap";
 import ComponentsSlider from "./components/ComponentsSlider.vue";
 import Header from "./components/Header.vue";
 import getUser from "./api/getUser";
@@ -63,7 +73,7 @@ export default {
       activeComponent: "",
       sliderOpened: false,
       logined: false,
-      editableCaptionText: "о_О",
+      editableCaptionText: "text_here",
     };
   },
 
@@ -120,29 +130,58 @@ export default {
       localStorage.removeItem("logined-user");
       this.logined = false;
     },
-		getCaptionFromLS() {
-			let captionFromLs = localStorage.getItem("captionMoneytracker");
+    getCaptionFromLS() {
+      let captionFromLs = localStorage.getItem("captionMoneytracker");
 
-			if (captionFromLs) {
-				this.editableCaptionText = captionFromLs;
-			}
-		},
-		getComponentNameFromWindowLocation() {
-			let path = window.location.pathname.split("/")[1];
+      if (captionFromLs) {
+        this.editableCaptionText = captionFromLs;
+      }
+    },
+    getComponentNameFromWindowLocation() {
+      let path = window.location.pathname.split("/")[1];
 
-			if (path && this.$options.componentNames.has(path)) {
-				this.triggerSLider(path);
-				return;
-			}
-		}
+      if (path && this.$options.componentNames.has(path)) {
+        this.triggerSLider(path);
+        return;
+      }
+    },
+
+    // transitions
+
+    beforeEnterCaption(element) {
+      element.style.transform = "translateX(500px)";
+			element.style.opacity = 0
+    },
+    enterCaption(element) {
+      gsap.to(element, {
+        duration: 1,
+				opacity : 1,
+        x: 0,
+        ease: "power2.out",
+      });
+    },
+		beforeEnterButton(element) {
+      element.style.transform = "translateY(200px)";
+			element.style.opacity = 0
+    },
+    enterButton(element, done) {
+      gsap.to(element, {
+        duration: 1,
+        y: 0,
+				opacity : 1,
+        onComplete : done,
+				ease: "back.out(1.7)",
+				delay : element.dataset.index * 0.2
+      });
+    },
   },
 
   mounted() {
-		getUser() ? this.logined = true : this.logined = false
+    getUser() ? (this.logined = true) : (this.logined = false);
 
-		this.getCaptionFromLS()
+    this.getCaptionFromLS();
 
-		this.getComponentNameFromWindowLocation()
+    this.getComponentNameFromWindowLocation();
   },
 };
 </script>
