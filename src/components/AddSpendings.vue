@@ -50,7 +50,9 @@ export default {
   },
   methods: {
     addSpend(obj) {
-      this.allSpendings.unshift(obj);
+			if(obj.description) {
+      	this.allSpendings.unshift(obj);
+			}
     },
     async saveSettings() {
       if (!this.savingSettings) {
