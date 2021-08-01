@@ -180,6 +180,12 @@ export default {
       });
     },
   },
+	mounted() {
+		for(let i = 0; i <= 200; i++) {
+			this.seriesData.push(Math.random() * 1000)
+			this.categories.push(i)
+		}
+	}
 };
 
 // REFACTORED

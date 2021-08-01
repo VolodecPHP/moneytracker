@@ -52,7 +52,7 @@
 	z-index: 100000;
 	top: 0;
 	left: 0;
-	background-color: rgba($color: #fff, $alpha: 0.5);
+	background-color: rgba(var(--mainBackground), $alpha: 0.5);
 	backdrop-filter: blur(10px);
 }
 

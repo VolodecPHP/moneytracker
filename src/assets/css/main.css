@@ -393,7 +393,7 @@ template {
   z-index: 100000;
   top: 0;
   left: 0;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(var(--mainBackground), 0.5);
   backdrop-filter: blur(10px);
 }
 
@@ -629,6 +629,9 @@ template {
 .highcharts-background {
   fill: #ffffff;
 }
+.theme-dark .highcharts-background {
+  fill: #222;
+}
 
 .highcharts-plot-border, .highcharts-plot-background {
   fill: none;
@@ -659,16 +662,25 @@ template {
   fill: #333333;
   font-size: 1.5em;
 }
+.theme-dark .highcharts-title {
+  fill: #fff;
+}
 
 .highcharts-subtitle {
   fill: #666666;
   font-size: 1em;
+}
+.theme-dark .highcharts-subtitle {
+  fill: #fff;
 }
 
 /* Axes */
 .highcharts-axis-line {
   fill: none;
   stroke: #ccd6eb;
+}
+.theme-dark .highcharts-axis-line {
+  stroke: #111;
 }
 
 .highcharts-yaxis .highcharts-axis-line {
@@ -678,16 +690,25 @@ template {
 .highcharts-axis-title {
   fill: #666666;
 }
+.theme-dark .highcharts-axis-title {
+  fill: #fff;
+}
 
 .highcharts-axis-labels {
   fill: #666666;
   cursor: default;
   font-size: 0.9em;
 }
+.theme-dark .highcharts-axis-labels {
+  fill: #fff;
+}
 
 .highcharts-grid-line {
   fill: none;
   stroke: #e6e6e6;
+}
+.theme-dark .highcharts-grid-line {
+  stroke: #111;
 }
 
 .highcharts-xaxis-grid .highcharts-grid-line {
@@ -697,6 +718,9 @@ template {
 .highcharts-tick {
   stroke: #ccd6eb;
 }
+.theme-dark .highcharts-tick {
+  stroke: #111;
+}
 
 .highcharts-yaxis .highcharts-tick {
   stroke-width: 0;
@@ -705,15 +729,24 @@ template {
 .highcharts-minor-grid-line {
   stroke: #f2f2f2;
 }
+.theme-dark .highcharts-minor-grid-line {
+  stroke: #111;
+}
 
 .highcharts-crosshair-thin {
   stroke-width: 1px;
   stroke: #cccccc;
 }
+.theme-dark .highcharts-crosshair-thin {
+  stroke: #111;
+}
 
 .highcharts-crosshair-category {
   stroke: #ccd6eb;
   stroke-opacity: 0.25;
+}
+.theme-dark .highcharts-crosshair-category {
+  stroke: #111;
 }
 
 /* Credits */
@@ -943,6 +976,9 @@ g.highcharts-series,
 .highcharts-pie-series .highcharts-point {
   stroke-linejoin: round;
   stroke: #ffffff;
+}
+.theme-dark .highcharts-pie-series .highcharts-point {
+  stroke: transparent;
 }
 
 .highcharts-pie-series .highcharts-point-hover {
@@ -1232,6 +1268,9 @@ circle.highcharts-legend-nav-active, circle.highcharts-legend-nav-inactive {
 .highcharts-navigator-xaxis .highcharts-grid-line {
   stroke-width: 1px;
   stroke: #e6e6e6;
+}
+.theme-dark .highcharts-navigator-xaxis .highcharts-grid-line {
+  stroke: #111;
 }
 
 .highcharts-navigator-xaxis.highcharts-axis-labels {
@@ -1540,6 +1579,9 @@ text.highcharts-drilldown-data-label,
   stroke-width: 1px;
   stroke: #E4E4E8;
 }
+.theme-dark .chart-line-wrapper .highcharts-xaxis-grid .highcharts-grid-line {
+  stroke: #111;
+}
 
 .chart-line-wrapper .highcharts-xaxis .highcharts-tick {
   stroke-width: 1px;
@@ -1553,6 +1595,10 @@ text.highcharts-drilldown-data-label,
 .chart-line-wrapper .highcharts-color-0 {
   fill: #353872 !important;
   stroke: #353872 !important;
+}
+.theme-dark .chart-line-wrapper .highcharts-color-0 {
+  fill: #464a96 !important;
+  stroke: #464a96 !important;
 }
 
 /* Define the stop colors */
@@ -1578,6 +1624,9 @@ text.highcharts-drilldown-data-label,
   font-size: 10px;
   fill: #222;
 }
+.theme-dark .chart-line-wrapper .highcharts-root text {
+  fill: #fff;
+}
 
 .chart-line-wrapper .highcharts-root .highcharts-title {
   font-weight: 500;
@@ -1585,6 +1634,10 @@ text.highcharts-drilldown-data-label,
   color: #222;
   fill: #222;
   line-height: 30px;
+}
+.theme-dark .chart-line-wrapper .highcharts-root .highcharts-title {
+  color: #fff;
+  fill: #fff;
 }
 
 .chart-line-wrapper .highcharts-root .highcharts-axis-title {
@@ -1603,6 +1656,14 @@ text.highcharts-drilldown-data-label,
   stroke-width: 1px;
 }
 
+.theme-dark .highcharts-scrollable-mask {
+  fill: #222;
+}
+
+.theme-changing * {
+  transition: all 0s !important;
+}
+
 :root {
   --mainColor: #929292;
   --mainBackground: #f2f2f2;
@@ -1610,18 +1671,33 @@ text.highcharts-drilldown-data-label,
   --mainShadow: 0px 0px 20px 2px rgb(112 112 112 / 25%);
   --focusColor: #222;
   --mainBorder: #cfcfcf;
+  --appBg: #f2f2f2;
+}
+
+.theme-dark {
+  --mainColor: #f2f2f2;
+  --mainBackground: #222;
+  --mainBorderRadius: 4px;
+  --mainShadow: none;
+  --focusColor: #fff;
+  --mainBorder: #111;
+  --appBg: #111;
 }
 
 #app {
   min-height: 100vh;
-  background-color: #f2f2f2;
+  background-color: var(--appBg);
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 *:focus {
-  box-shadow: 0 0 10px #929292 !important;
-  color: #222 !important;
+  box-shadow: 0 0 10px var(--mainColor) !important;
+  color: var(--focusColor) !important;
+}
+.theme-dark *:focus {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7) !important;
 }
 
 .app-inner {
@@ -1632,11 +1708,56 @@ text.highcharts-drilldown-data-label,
   align-items: center;
   flex-wrap: wrap;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  color: #929292;
+  color: var(--mainColor);
 }
 @media (max-width: 1200px) {
   .app-inner {
     padding-top: 125px;
+  }
+}
+
+.theme-toggler {
+  position: absolute;
+  top: 95px;
+  right: 15px;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  outline: none !important;
+  width: 25px;
+  height: 25px;
+  padding: 0;
+  border-radius: 50%;
+  color: var(--focusColor);
+}
+.theme-toggler svg {
+  width: 100%;
+}
+.theme-toggler:focus {
+  box-shadow: none !important;
+}
+.theme-toggler .theme-changing-circle {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 0px;
+  height: 0px;
+  transform: translate(50%, -50%);
+  background-color: #000;
+  filter: invert(100%);
+  mix-blend-mode: difference;
+  transition: 0.3s;
+  border-radius: 50%;
+  z-index: 10000;
+}
+.theme-dark .theme-toggler .theme-changing-circle {
+  background-color: #fff;
+  filter: invert(0);
+}
+@media (min-width: 767px) {
+  .theme-toggler:hover .theme-changing-circle {
+    width: 150px;
+    height: 150px;
   }
 }
 
@@ -1648,6 +1769,7 @@ text.highcharts-drilldown-data-label,
   text-transform: uppercase;
   display: block;
   margin-top: 0;
+  color: var(--mainColor);
 }
 @media (max-width: 767px) {
   .app-main-title {
@@ -1658,10 +1780,10 @@ text.highcharts-drilldown-data-label,
 
 .card {
   padding: 30px;
-  border-radius: 4px;
-  background-color: #f2f2f2;
-  color: #929292;
-  box-shadow: 0px 0px 20px 2px rgba(112, 112, 112, 0.25);
+  border-radius: var(--mainBorderRadius);
+  background-color: var(--mainBackground);
+  color: var(--mainColor);
+  box-shadow: var(--mainShadow);
   border: none;
   outline: none;
   transition: 0.2s ease;
@@ -1670,6 +1792,9 @@ text.highcharts-drilldown-data-label,
   .card {
     padding: 15px;
   }
+}
+.theme-dark .card {
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.8);
 }
 .card-title {
   font-size: 20px;
@@ -1692,9 +1817,9 @@ text.highcharts-drilldown-data-label,
   cursor: pointer;
 }
 .app-main-card:hover {
-  transform: scale(1.05);
-  color: #222;
-  box-shadow: 0 0 30px #929292 !important;
+  transform: scale(1.05) !important;
+  color: var(--focusColor);
+  box-shadow: 0 0 30px var(--mainColor) !important;
 }
 @media (max-width: 768px) {
   .app-main-card:hover {
@@ -1703,12 +1828,16 @@ text.highcharts-drilldown-data-label,
     box-shadow: unset;
   }
 }
+.theme-dark .app-main-card {
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.8);
+  box-shadow: none !important;
+}
 
 .component-slider-wrapper {
   position: fixed;
   width: 100%;
   padding: 15px 0;
-  background-color: #f2f2f2;
+  background-color: var(--mainBackground);
   top: 0;
   left: 0;
   display: flex;
@@ -1778,7 +1907,7 @@ text.highcharts-drilldown-data-label,
   margin-top: 0;
   margin-bottom: 35px;
   font-size: 26px;
-  color: #929292;
+  color: var(--mainColor);
   line-height: 1.5;
 }
 @media (max-width: 768px) {
@@ -1790,18 +1919,18 @@ text.highcharts-drilldown-data-label,
 .label-default {
   font-size: 18px;
   display: inline-block;
-  color: #929292;
+  color: var(--mainColor);
   margin-bottom: 10px;
 }
 
 .input-default {
   padding: 7px;
-  border: 1px solid #cfcfcf;
+  border: 1px solid var(--mainBorder);
   outline: none;
   font-size: 17px;
-  color: #929292;
-  border-radius: 4px;
-  background-color: #f2f2f2;
+  color: var(--mainColor);
+  border-radius: var(--mainBorderRadius);
+  background-color: var(--mainBackground);
   line-height: 1.25;
 }
 
@@ -1814,6 +1943,8 @@ text.highcharts-drilldown-data-label,
   border-radius: 50%;
   cursor: pointer;
   padding: 0;
+  color: var(--mainColor);
+  background-color: transparent;
 }
 @media (max-width: 768px) {
   .button-add {
@@ -1823,7 +1954,7 @@ text.highcharts-drilldown-data-label,
   }
 }
 .button-add svg {
-  color: #929292;
+  color: var(--mainColor);
   width: 100%;
   height: 100%;
 }
@@ -1858,7 +1989,7 @@ text.highcharts-drilldown-data-label,
   text-transform: uppercase;
   font-weight: 700;
   padding-top: 5px;
-  color: #222;
+  color: var(--focusColor);
 }
 .category-card-row .total .totalValue {
   color: #353872;
@@ -1910,7 +2041,7 @@ text.highcharts-drilldown-data-label,
 
 .btn-primary {
   background-color: #484C93;
-  border-radius: 4px;
+  border-radius: var(--mainBorderRadius);
   color: #fff;
   outline: none;
   cursor: pointer;
@@ -1932,7 +2063,7 @@ text.highcharts-drilldown-data-label,
 
 .btn-warning {
   background-color: #ea9200;
-  border-radius: 4px;
+  border-radius: var(--mainBorderRadius);
   color: #fff;
   outline: none;
   cursor: pointer;
@@ -1954,7 +2085,7 @@ text.highcharts-drilldown-data-label,
 
 .btn-danger {
   background-color: #a51818;
-  border-radius: 4px;
+  border-radius: var(--mainBorderRadius);
   color: #fff;
   outline: none;
   cursor: pointer;
@@ -1983,11 +2114,15 @@ text.highcharts-drilldown-data-label,
   padding: 8px 16px;
   font-size: 18px;
   border-radius: 100px;
-  background-color: #929292;
-  color: #f2f2f2;
+  background-color: var(--mainColor);
+  color: var(--mainBackground);
   cursor: pointer;
   margin-right: 10px;
   margin-bottom: 10px;
+}
+.theme-dark .category-filters-wrapper .filter {
+  background-color: #111;
+  color: #fff;
 }
 .category-filters-wrapper .filter:hover {
   filter: brightness(1.2);
@@ -2047,12 +2182,15 @@ text.highcharts-drilldown-data-label,
   background-color: #c4c4c4;
   border-radius: 4px;
 }
+.theme-dark ::-webkit-scrollbar-thumb {
+  background-color: #000;
+}
 
 .confirmation-popup-wrapper {
   width: 100vw;
   height: 100vh;
   position: fixed;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(var(--mainBackground), 0.5);
   backdrop-filter: blur(10px);
   transition: 0.25s ease;
   opacity: 0;
@@ -2075,7 +2213,7 @@ text.highcharts-drilldown-data-label,
 .confirmation-popup-wrapper .confirmation-popup .confirmation-popup-title {
   width: 100%;
   font-size: 25px;
-  color: #222;
+  color: var(--focusColor);
   margin-bottom: 50px;
 }
 .confirmation-popup-wrapper .confirmation-popup .confirmation-popup-title #confirmationPopupQuestion {
@@ -2165,7 +2303,7 @@ text.highcharts-drilldown-data-label,
 }
 .card--small .total {
   font-weight: 20px;
-  color: #222;
+  color: var(--focusColor);
   position: absolute;
   top: 50%;
   right: 20px;
@@ -2217,8 +2355,8 @@ text.highcharts-drilldown-data-label,
 }
 .edit-cards-wrapper .edit-card:hover {
   transform: scale(1.05);
-  color: #222;
-  box-shadow: 0 0 10px #929292 !important;
+  color: var(--focusColor);
+  box-shadow: 0 0 10px var(--mainColor) !important;
 }
 @media (max-width: 768px) {
   .edit-cards-wrapper .edit-card:hover {
@@ -2231,20 +2369,20 @@ text.highcharts-drilldown-data-label,
   margin-right: 0;
 }
 .edit-cards-wrapper .edit-card--active {
-  border: 3px solid #222;
-  color: #222;
+  border: 3px solid var(--focusColor);
+  color: var(--focusColor);
 }
 
 .no-spendings-title {
   font-size: 24px;
   font-weight: 600;
-  color: #222;
+  color: var(--focusColor);
 }
 
 .spending-name {
   font-size: 18px;
   font-weight: 600;
-  color: #222;
+  color: var(--focusColor);
   margin-bottom: 15px;
 }
 
@@ -2280,14 +2418,14 @@ text.highcharts-drilldown-data-label,
   display: flex;
   padding: 10px 5px;
   justify-content: space-between;
-  border-radius: 4px;
-  border: 1px solid #cfcfcf;
+  border-radius: var(--mainBorderRadius);
+  border: 1px solid var(--mainBorder);
 }
 .date-range-picker-label input {
   background-color: transparent;
   border: none;
   width: 35%;
-  color: #929292;
+  color: var(--mainColor);
   outline: none;
 }
 .date-range-picker-label input:focus {
@@ -2356,7 +2494,7 @@ text.highcharts-drilldown-data-label,
   padding-bottom: 40px;
   margin-bottom: 10px;
   display: inline-block;
-  border-bottom: 1px solid #222;
+  border-bottom: 1px solid var(--focusColor);
   padding-right: 15px;
   margin-right: 15px;
   position: relative;
@@ -2373,7 +2511,7 @@ text.highcharts-drilldown-data-label,
   text-transform: uppercase;
   margin-bottom: 5px;
   font-weight: 600;
-  color: #222;
+  color: var(--focusColor);
 }
 .show-spendings-card--list .spending-detais .details-category .details-category-spend {
   line-height: 20px;
@@ -2383,7 +2521,7 @@ text.highcharts-drilldown-data-label,
 .show-spendings-card--list .spending-detais .details-category .details-category-total {
   padding-top: 10px;
   text-transform: uppercase;
-  color: #222;
+  color: var(--focusColor);
   position: absolute;
   left: 0;
   bottom: 5px;
@@ -2393,7 +2531,7 @@ text.highcharts-drilldown-data-label,
   width: 100%;
   font-size: 20px;
   font-weight: 700;
-  color: #222;
+  color: var(--focusColor);
 }
 
 .sorts-panel {
@@ -2456,7 +2594,7 @@ text.highcharts-drilldown-data-label,
   background-color: transparent;
   outline: none !important;
   cursor: pointer;
-  color: #929292;
+  color: var(--mainColor);
 }
 @media (max-width: 1400px) {
   .sorts-panel .sort-button {
@@ -2473,7 +2611,7 @@ text.highcharts-drilldown-data-label,
 .sorts-panel .sort-button:focus {
   outline: none !important;
   box-shadow: none !important;
-  color: #929292 !important;
+  color: var(--mainColor) !important;
 }
 .sorts-panel label {
   display: flex;
@@ -2502,7 +2640,7 @@ text.highcharts-drilldown-data-label,
   border: none;
   outline: none;
   box-shadow: none;
-  color: #929292;
+  color: var(--mainColor);
   margin-right: 20px;
   padding: 0;
   cursor: pointer;
@@ -2516,7 +2654,7 @@ text.highcharts-drilldown-data-label,
 .icon-reset-filters:focus {
   box-shadow: none !important;
   outline: none !important;
-  color: #929292 !important;
+  color: var(--mainColor) !important;
 }
 .icon-reset-filters svg {
   width: 30px;
@@ -2524,10 +2662,14 @@ text.highcharts-drilldown-data-label,
 }
 
 .chart-wrapper {
+  overflow: hidden;
   padding: 5px;
   background-color: #fff;
   margin-bottom: 25px;
   width: 100%;
+}
+.theme-dark .chart-wrapper {
+  background-color: #222;
 }
 
 ::-webkit-scrollbar:horizontal {
@@ -2537,6 +2679,9 @@ text.highcharts-drilldown-data-label,
 ::-webkit-scrollbar-thumb:horizontal {
   background: linear-gradient(0.25turn, #353872, #484C93, #353872);
   border-radius: 8px;
+}
+.theme-dark ::-webkit-scrollbar-thumb:horizontal {
+  background-color: #000;
 }
 
 .show-spendings-diagrams-wrapper {
@@ -2565,6 +2710,9 @@ text.highcharts-drilldown-data-label,
   padding: 20px;
   margin-bottom: 20px;
 }
+.theme-dark .enabled-filters-wrapper .category-row {
+  background-color: #222;
+}
 @media (max-width: 767px) {
   .enabled-filters-wrapper .category-row {
     width: 100%;
@@ -2574,7 +2722,7 @@ text.highcharts-drilldown-data-label,
 .enabled-filters-wrapper .category-row .category-name {
   width: 100%;
   font-weight: 600;
-  color: #222;
+  color: var(--focusColor);
   font-size: 18px;
   margin-bottom: 20px;
   display: flex;
@@ -2589,12 +2737,15 @@ text.highcharts-drilldown-data-label,
   width: auto;
   margin-right: 15px;
   padding: 10px;
-  border-radius: 4px;
-  background-color: #f2f2f2;
-  color: #929292;
+  border-radius: var(--mainBorderRadius);
+  background-color: var(--mainBackground);
+  color: var(--mainColor);
   cursor: pointer;
   display: flex;
   align-items: center;
+}
+.theme-dark .enabled-filters-wrapper .category-row .filters .filter-row {
+  background-color: #111;
 }
 @media (max-width: 767px) {
   .enabled-filters-wrapper .category-row .filters .filter-row {
@@ -2612,7 +2763,6 @@ text.highcharts-drilldown-data-label,
   width: 15px;
   height: 15px;
   margin-left: 15px;
-  background-color: red;
   margin-right: 0;
 }
 
@@ -2640,7 +2790,7 @@ text.highcharts-drilldown-data-label,
   display: block;
   margin-bottom: 25px;
   font-size: 18px;
-  color: #222;
+  color: var(--focusColor);
   font-weight: 600;
   display: flex;
   flex-direction: column;
@@ -2661,12 +2811,12 @@ text.highcharts-drilldown-data-label,
   border: none;
   outline: none;
   background: transparent;
-  border-radius: 4px;
+  border-radius: var(--mainBorderRadius);
   cursor: pointer;
 }
 .login-form-wrapper .input-wrapper .show-password-button svg {
   width: 16px;
-  color: #222;
+  color: var(--focusColor);
 }
 .login-form-wrapper .login-button {
   width: 50%;
@@ -2684,7 +2834,7 @@ text.highcharts-drilldown-data-label,
   outline: none;
   border: none;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: var(--mainBorderRadius);
   font-weight: 700;
 }
 .login-form-wrapper .change-method-button:focus {
@@ -2709,8 +2859,8 @@ text.highcharts-drilldown-data-label,
 .page-header {
   position: fixed;
   height: 80px;
-  background-color: #f2f2f2;
-  box-shadow: 0px 0px 20px 2px rgba(112, 112, 112, 0.25);
+  background-color: var(--mainBackground);
+  box-shadow: var(--mainShadow);
   top: 0;
   left: 0;
   width: 100%;
@@ -2719,6 +2869,9 @@ text.highcharts-drilldown-data-label,
   align-items: center;
   z-index: 999;
   justify-content: space-between;
+}
+.theme-dark .page-header {
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.8);
 }
 .page-header .header-logo {
   width: 60px;
@@ -2746,7 +2899,7 @@ text.highcharts-drilldown-data-label,
   outline: none;
   border: none;
   padding: 0;
-  color: #929292;
+  color: var(--mainColor);
   cursor: pointer;
 }
 .page-header .header-right .logout:focus {

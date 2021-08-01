@@ -80,8 +80,8 @@ export default {
 			let result = await confirmation('назавжди видалити цю категорію і її фільтри')
 			if(result) {
 				this.$emit('handle-delete', this.$props.info)
+				this.isEditing = false
 			}
-			this.isEditing = false
 		},
 		async saveChanges() {
 			let result = await confirmation('зберегти зміни, попередні дані буде втрачено')
