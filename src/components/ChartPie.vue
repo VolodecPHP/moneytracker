@@ -26,20 +26,35 @@ export default {
     chartOptions() {
       return {
         chart: {
-          plotBackgroundColor: null,
-          plotBorderWidth: null,
-          plotShadow: false,
-          type: "pie",
+          spacingBottom: 15,
+          spacingTop: 20,
+          spacingLeft: 10,
+          spacingRight: 10,
+          styledMode: true,
+        	type: 'column'
         },
         title: {
           text: "Статистика витрат",
           style: {
             fontSize: "18px",
             fontWeight: "500",
-            color: "#222",
           },
         },
-
+				yAxis: [{
+						title: {
+							text: null
+						},
+				}],
+				xAxis: {
+          categories: this.sortedData.map(data => data.name),
+          labels: {
+            style: {
+              color: "#222",
+            },
+          },
+          tickmarkPlacement: "on",
+          startOnTick: true,
+        },
         plotOptions: {
           pie: {
             allowPointSelect: true,
@@ -50,13 +65,15 @@ export default {
             },
           },
         },
+
         series: [
           {
-            name: "Витрачено",
+            name: 'Витрати за категорією',
             colorByPoint: true,
-            data: this.chartData,
+            data: this.sortedData,
           },
         ],
+
         responsive: {
           rules: [
             {
@@ -64,19 +81,28 @@ export default {
                 maxWidth: 767,
               },
               chartOptions: {
-                plotOptions: {
-                  pie: {
-                    dataLabels: {
-                      distance: 0,
-                    },
-                  },
-                },
+								chart: {
+									type: 'bar'
+								},
               },
             },
           ],
         },
       };
     },
+		sortedData() {
+			return this.chartData.sort((a,b) => {
+				if(Number(a.y) > Number(b.y)) {
+					return -1
+				} 
+
+				if(Number(a.y) < Number(b.y)) {
+					return 1
+				} 
+
+				return 0
+			})
+		}
   },
   props: {
     spendings: {

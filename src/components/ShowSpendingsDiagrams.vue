@@ -7,6 +7,7 @@
         :key="index"
         class="card category-row"
       >
+			
         <label class="category-name">
           {{ category.categoryName }}
           <input
@@ -36,6 +37,10 @@
       </div>
     </div>
     <div class="scroll-container">
+							<div class="chart-total-spendings">
+					<span class="total">Усього витрат за цей час: </span>
+					<span class="amount">{{ totalSpendings }} грн</span>
+				</div>
       <div class="show-spendings-diagrams-wrapper">
         <chart-line :spendings="chartInfo" />
         <chart-pie :spendings="chartInfoPie" />
@@ -146,6 +151,9 @@ export default {
 
       return chartData;
     },
+		totalSpendings() {
+			return this.chartInfo.reduce((a, b) => a + b.spending, 0)
+		}
   },
   async mounted() {
 		let user = getUser()

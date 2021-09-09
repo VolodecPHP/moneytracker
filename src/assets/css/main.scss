@@ -1361,9 +1361,19 @@ body {
 	overflow-x: hidden
 }
 
+.chart-total-spendings {
+	width: 100%;
+	padding: 0 0 25px;
+
+	.total {
+		font-size: 24px;
+	}
+
+	.amount {
+		font-size: 28px;
+		font-weight: 600;
+		color: var(--focusColor)
+	}
+}
 @import "transitions";
-
-
-
-
 
