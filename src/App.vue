@@ -1,10 +1,11 @@
 <template>
   <div class="app-inner">
     <template v-if="logined">
+      <!-- HEADER -->
       <Header @logout="logout" />
-
-			<theme-toggler />
-
+      <!-- THEME TOGGlER -->
+      <theme-toggler />
+      <!-- CAPTION -->
       <transition
         appear
         @before-enter="beforeEnterCaption"
@@ -18,6 +19,7 @@
           >!
         </h1>
       </transition>
+      <!-- CARDS(LINKS TO PAGES) -->
       <transition-group
         appear
         @before-enter="beforeEnterButton"
@@ -38,16 +40,17 @@
           </div>
         </button>
       </transition-group>
+      <!-- SLIDER -->
       <components-slider
         :currentComponent="activeComponent"
         :opened="sliderOpened"
         @close-slider="closeSlider"
       ></components-slider>
     </template>
-
+    <!-- LOGINED PAGE -->
     <login @login="successfullyLogined" v-else />
-
-		<confirmation />
+    <!-- CONFIRMATION POPUP -->
+    <confirmation />
   </div>
 </template>
 
@@ -66,8 +69,8 @@ export default {
     ComponentsSlider,
     Login,
     Header,
-		Confirmation,
-		ThemeToggler
+    Confirmation,
+    ThemeToggler,
   },
 
   data() {
@@ -114,30 +117,13 @@ export default {
   ]),
 
   methods: {
+		// SLIDER METHODS
     triggerSLider(componentName) {
       this.activeComponent = componentName;
       this.sliderOpened = true;
     },
     closeSlider() {
       this.sliderOpened = false;
-    },
-    successfullyLogined(user) {
-      this.logined = true;
-      localStorage.setItem('logined-user', JSON.stringify(user));
-    },
-    captionChange(e) {
-      localStorage.setItem('captionMoneytracker', e.target.textContent);
-    },
-    logout() {
-      localStorage.removeItem('logined-user');
-      this.logined = false;
-    },
-    getCaptionFromLS() {
-      let captionFromLs = localStorage.getItem('captionMoneytracker');
-
-      if (captionFromLs) {
-        this.editableCaptionText = captionFromLs;
-      }
     },
     getComponentNameFromWindowLocation() {
       let path = window.location.pathname.split('/')[1];
@@ -147,8 +133,28 @@ export default {
         return;
       }
     },
-    // transitions
+		// LOGIN METHODS
+    successfullyLogined(user) {
+      this.logined = true;
+      localStorage.setItem('logined-user', JSON.stringify(user));
+    },
+    logout() {
+      localStorage.removeItem('logined-user');
+      this.logined = false;
+    },
+		// CAPTION METHODS
+    captionChange(e) {
+      localStorage.setItem('captionMoneytracker', e.target.textContent);
+    },
+    getCaptionFromLS() {
+      let captionFromLs = localStorage.getItem('captionMoneytracker');
 
+      if (captionFromLs) {
+        this.editableCaptionText = captionFromLs;
+      }
+    },
+
+    // TRANSITIONS
     beforeEnterCaption(element) {
       element.style.transform = 'translateX(500px)';
       element.style.opacity = 0;
